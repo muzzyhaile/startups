@@ -122,6 +122,10 @@ const CategoryGrid = () => {
               <Card 
                 key={category.name}
                 className={`${category.bgColor} hover:scale-105 transition-all duration-300 cursor-pointer group`}
+                onClick={() => {
+                  console.log(`Navigating to ${category.name} category`);
+                  // TODO: Navigate to category page
+                }}
               >
                 <CardContent className="p-6 text-center">
                   <div className="flex justify-center mb-4">

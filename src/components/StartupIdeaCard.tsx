@@ -41,11 +41,15 @@ const StartupIdeaCard = ({
 
   return (
     <Card 
-      className={`group transition-all duration-300 hover:shadow-card hover:scale-[1.02] ${
+      className={`group transition-all duration-300 hover:shadow-card hover:scale-[1.02] cursor-pointer ${
         featured 
           ? "border-primary/50 bg-gradient-accent shadow-glow" 
           : "border-border/50 hover:border-primary/30"
       }`}
+      onClick={() => {
+        console.log(`Opening detailed view for: ${title}`);
+        // TODO: Navigate to idea detail page
+      }}
     >
       <CardHeader className="space-y-4">
         <div className="flex items-start justify-between">
@@ -125,6 +129,11 @@ const StartupIdeaCard = ({
         <Button 
           className="w-full bg-gradient-primary hover:opacity-90 transition-all duration-300"
           size="lg"
+          onClick={(e) => {
+            e.stopPropagation();
+            console.log(`Opening full analysis for: ${title}`);
+            // TODO: Navigate to detailed analysis page
+          }}
         >
           View Full Analysis
         </Button>
