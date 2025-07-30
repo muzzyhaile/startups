@@ -106,7 +106,7 @@ const CategoryGrid = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="py-16 px-4">
+    <section id="explore-categories" className="py-16 px-4">
       <div className="container mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
