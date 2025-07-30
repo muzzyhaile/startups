@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Zap, TrendingUp, Brain } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-bg.jpg";
 
 const Hero = () => {
+  const navigate = useNavigate();
+  
   return (
     <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
@@ -48,6 +51,7 @@ const Hero = () => {
             <Button 
               size="lg"
               className="bg-gradient-primary hover:opacity-90 transition-all duration-300 shadow-glow text-lg px-8 py-6 h-auto"
+              onClick={() => navigate('/idea/AI-Powered Personal Finance Assistant')}
             >
               Get Today's Idea
               <ArrowRight className="w-5 h-5 ml-2" />
