@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Target, DollarSign, Users, Clock, BookmarkPlus, Share2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface StartupIdeaCardProps {
   title: string;
@@ -26,6 +27,7 @@ const StartupIdeaCard = ({
   difficulty,
   featured = false,
 }: StartupIdeaCardProps) => {
+  const navigate = useNavigate();
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case "Easy":
@@ -47,8 +49,7 @@ const StartupIdeaCard = ({
           : "border-border/50 hover:border-primary/30"
       }`}
       onClick={() => {
-        console.log(`Opening detailed view for: ${title}`);
-        // TODO: Navigate to idea detail page
+        navigate(`/idea/${encodeURIComponent(title)}`);
       }}
     >
       <CardHeader className="space-y-4">
@@ -131,8 +132,7 @@ const StartupIdeaCard = ({
           size="lg"
           onClick={(e) => {
             e.stopPropagation();
-            console.log(`Opening full analysis for: ${title}`);
-            // TODO: Navigate to detailed analysis page
+            navigate(`/idea/${encodeURIComponent(title)}`);
           }}
         >
           View Full Analysis

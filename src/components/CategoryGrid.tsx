@@ -1,4 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { useNavigate } from "react-router-dom";
 import { 
   Smartphone, 
   ShoppingCart, 
@@ -102,6 +103,8 @@ const categories = [
 ];
 
 const CategoryGrid = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="py-16 px-4">
       <div className="container mx-auto">
@@ -123,8 +126,7 @@ const CategoryGrid = () => {
                 key={category.name}
                 className={`${category.bgColor} hover:scale-105 transition-all duration-300 cursor-pointer group`}
                 onClick={() => {
-                  console.log(`Navigating to ${category.name} category`);
-                  // TODO: Navigate to category page
+                  navigate(`/category/${encodeURIComponent(category.name)}`);
                 }}
               >
                 <CardContent className="p-6 text-center">
