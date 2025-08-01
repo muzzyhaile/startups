@@ -97,10 +97,10 @@ const Index = () => {
             </div>
             <div className="flex flex-col items-start">
               <span className="font-bebas text-2xl text-foreground tracking-wider">
-                STARTUP.KILL
+                STARTUPIDEA.AI
               </span>
               <span className="font-mono text-xs text-primary tracking-widest">
-                IDEA_PRODUCTION_STUDIO
+                INNOVATION_ENGINE
               </span>
             </div>
           </div>

@@ -12,10 +12,10 @@ const Header = () => {
           </div>
           <div className="flex flex-col">
             <span className="font-bebas text-xl tracking-wider text-foreground">
-              STARTUP.KILL
+              STARTUPIDEA.AI
             </span>
             <span className="font-mono text-xs text-primary tracking-widest leading-none">
-              IDEA_PRODUCTION
+              INNOVATION_ENGINE
             </span>
           </div>
         </div>
@@ -23,15 +23,15 @@ const Header = () => {
         {/* Cinematic navigation */}
         <nav className="hidden md:flex items-center space-x-8">
           <a href="#ideas" className="font-oswald text-sm font-medium text-foreground/80 hover:text-primary transition-cinematic tracking-wider uppercase relative group">
-            ARSENAL
+            IDEAS
             <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
           </a>
           <a href="#categories" className="font-oswald text-sm font-medium text-foreground/80 hover:text-primary transition-cinematic tracking-wider uppercase relative group">
-            TARGETS
+            CATEGORIES
             <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
           </a>
           <a href="#about" className="font-oswald text-sm font-medium text-foreground/80 hover:text-primary transition-cinematic tracking-wider uppercase relative group">
-            MISSION
+            ABOUT
             <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
           </a>
         </nav>
@@ -39,7 +39,7 @@ const Header = () => {
         <div className="flex items-center space-x-3">
           <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-bebas text-sm tracking-wider transform -skew-x-6 transition-cinematic shadow-card hidden sm:flex">
             <Target className="w-4 h-4 mr-2" />
-            STRIKE NOW
+            GENERATE IDEA
           </Button>
           
           <Button variant="ghost" size="sm" className="md:hidden text-primary">
