@@ -1,66 +1,52 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Zap, TrendingUp, Brain } from "lucide-react";
+import { ArrowRight, Brain, TrendingUp, Lightbulb } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import heroImage from "@/assets/hero-bg.jpg";
 
 const Hero = () => {
   const navigate = useNavigate();
   
   return (
-    <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroImage})` }}
-      >
-        <div className="absolute inset-0 bg-background/60 backdrop-blur-sm" />
-      </div>
-      
-      {/* Gradient Overlays */}
-      <div className="absolute inset-0 bg-gradient-primary opacity-20" />
-      <div className="absolute inset-0 bg-gradient-secondary opacity-40" />
+    <section className="relative py-20 md:py-32">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 bg-gradient-accent" />
       
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 text-center">
+      <div className="relative container mx-auto px-4 text-center">
         <div className="max-w-4xl mx-auto">
           {/* Badge */}
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-accent border border-primary/20 mb-6">
-            <Zap className="w-4 h-4 mr-2 text-primary" />
-            <span className="text-sm font-medium">AI-Powered Startup Ideas</span>
+          <div className="inline-flex items-center px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-sm font-medium mb-8">
+            <Lightbulb className="w-4 h-4 mr-2" />
+            AI-Powered Startup Ideas
           </div>
           
           {/* Headline */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-            <span className="bg-gradient-to-r from-primary via-blue-500 to-purple-500 bg-clip-text text-transparent">
-              Revolutionary
-            </span>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-foreground">
+            Discover Your Next
             <br />
-            <span className="text-foreground">Startup Ideas</span>
-            <br />
-            <span className="text-foreground/80">Generated Daily</span>
+            <span className="text-primary">Big Idea</span>
           </h1>
           
           {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-foreground/70 mb-8 max-w-2xl mx-auto leading-relaxed">
-            Discover sophisticated, AI-generated startup concepts with detailed market analysis, 
-            target audiences, and implementation strategies.
+          <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
+            Access curated startup concepts with comprehensive market analysis, 
+            target audiences, and actionable implementation strategies.
           </p>
           
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-16">
             <Button 
               size="lg"
-              className="bg-gradient-primary hover:opacity-90 transition-all duration-300 shadow-glow text-lg px-8 py-6 h-auto"
+              className="bg-primary hover:bg-primary/90 transition-smooth shadow-elevated px-8 py-3"
               onClick={() => navigate('/idea/AI-Powered Personal Finance Assistant')}
             >
-              Get Today's Idea
-              <ArrowRight className="w-5 h-5 ml-2" />
+              Explore Today's Idea
+              <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
             
             <Button 
               variant="outline" 
               size="lg"
-              className="border-primary/30 hover:bg-primary/10 transition-all duration-300 text-lg px-8 py-6 h-auto"
+              className="border-border hover:bg-accent transition-smooth px-8 py-3"
               onClick={() => {
                 document.getElementById('explore-categories')?.scrollIntoView({ 
                   behavior: 'smooth' 
@@ -72,29 +58,29 @@ const Hero = () => {
           </div>
           
           {/* Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-xl mx-auto">
             <div className="text-center">
               <div className="flex items-center justify-center mb-2">
-                <Brain className="w-6 h-6 text-primary mr-2" />
-                <span className="text-2xl font-bold text-primary">500+</span>
+                <Brain className="w-5 h-5 text-primary mr-2" />
+                <span className="text-2xl font-semibold text-foreground">500+</span>
               </div>
-              <p className="text-foreground/60">Ideas Generated</p>
+              <p className="text-muted-foreground text-sm">Ideas Generated</p>
             </div>
             
             <div className="text-center">
               <div className="flex items-center justify-center mb-2">
-                <TrendingUp className="w-6 h-6 text-primary mr-2" />
-                <span className="text-2xl font-bold text-primary">95%</span>
+                <TrendingUp className="w-5 h-5 text-primary mr-2" />
+                <span className="text-2xl font-semibold text-foreground">95%</span>
               </div>
-              <p className="text-foreground/60">Market Viability</p>
+              <p className="text-muted-foreground text-sm">Market Viability</p>
             </div>
             
             <div className="text-center">
               <div className="flex items-center justify-center mb-2">
-                <Zap className="w-6 h-6 text-primary mr-2" />
-                <span className="text-2xl font-bold text-primary">Daily</span>
+                <Lightbulb className="w-5 h-5 text-primary mr-2" />
+                <span className="text-2xl font-semibold text-foreground">Daily</span>
               </div>
-              <p className="text-foreground/60">Fresh Ideas</p>
+              <p className="text-muted-foreground text-sm">Fresh Ideas</p>
             </div>
           </div>
         </div>

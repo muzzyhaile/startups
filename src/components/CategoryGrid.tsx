@@ -124,23 +124,23 @@ const CategoryGrid = () => {
             return (
               <Card 
                 key={category.name}
-                className={`${category.bgColor} hover:scale-105 transition-all duration-300 cursor-pointer group`}
+                className={`border-border hover:border-primary/20 hover:shadow-card transition-smooth cursor-pointer group`}
                 onClick={() => {
                   navigate(`/category/${encodeURIComponent(category.name)}`);
                 }}
               >
                 <CardContent className="p-6 text-center">
                   <div className="flex justify-center mb-4">
-                    <div className="p-3 rounded-lg bg-background/50">
-                      <IconComponent className={`w-6 h-6 ${category.color}`} />
+                    <div className="w-12 h-12 rounded-xl bg-primary/5 flex items-center justify-center group-hover:bg-primary/10 transition-smooth">
+                      <IconComponent className="w-6 h-6 text-primary" />
                     </div>
                   </div>
                   
-                  <h3 className="font-semibold mb-2 group-hover:text-primary transition-colors">
+                  <h3 className="font-semibold mb-2 text-foreground group-hover:text-primary transition-smooth">
                     {category.name}
                   </h3>
                   
-                  <p className="text-sm text-foreground/60">
+                  <p className="text-sm text-muted-foreground">
                     {category.count} ideas
                   </p>
                 </CardContent>

@@ -69,17 +69,17 @@ const Index = () => {
       <CategoryGrid />
       
       {/* Footer */}
-      <footer className="py-12 border-t border-border">
+      <footer className="py-12 border-t border-border bg-secondary/30">
         <div className="container mx-auto px-4 text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <div className="w-6 h-6 bg-gradient-primary rounded-lg flex items-center justify-center">
+            <div className="w-6 h-6 bg-primary rounded-lg flex items-center justify-center">
               <span className="text-primary-foreground text-sm font-bold">S</span>
             </div>
-            <span className="text-lg font-bold bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent">
+            <span className="text-lg font-semibold text-foreground">
               StartupIdea.AI
             </span>
           </div>
-          <p className="text-foreground/60">
+          <p className="text-muted-foreground">
             Generating the future, one idea at a time.
           </p>
         </div>

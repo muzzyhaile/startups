@@ -43,10 +43,10 @@ const StartupIdeaCard = ({
 
   return (
     <Card 
-      className={`group transition-all duration-300 hover:shadow-card hover:scale-[1.02] cursor-pointer ${
+      className={`group transition-smooth hover:shadow-elevated cursor-pointer ${
         featured 
-          ? "border-primary/50 bg-gradient-accent shadow-glow" 
-          : "border-border/50 hover:border-primary/30"
+          ? "border-primary/20 bg-gradient-accent" 
+          : "border-border hover:border-primary/20"
       }`}
       onClick={() => {
         navigate(`/idea/${encodeURIComponent(title)}`);
@@ -128,7 +128,7 @@ const StartupIdeaCard = ({
         </div>
         
         <Button 
-          className="w-full bg-gradient-primary hover:opacity-90 transition-all duration-300"
+          className="w-full bg-primary hover:bg-primary/90 transition-smooth"
           size="lg"
           onClick={(e) => {
             e.stopPropagation();
