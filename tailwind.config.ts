@@ -18,6 +18,11 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'bebas': ['Bebas Neue', 'sans-serif'],
+				'oswald': ['Oswald', 'sans-serif'],
+				'mono': ['JetBrains Mono', 'monospace'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -74,16 +79,23 @@ export default {
 				'gradient-accent': 'var(--gradient-accent)',
 				'gradient-hero': 'var(--gradient-hero)',
 				'gradient-glass': 'var(--gradient-glass)',
+				'gradient-film': 'var(--gradient-film)',
 			},
 			boxShadow: {
 				'glow': 'var(--shadow-glow)',
 				'card': 'var(--shadow-card)',
 				'elevated': 'var(--shadow-elevated)',
 				'hero': 'var(--shadow-hero)',
+				'text': 'var(--shadow-text)',
+			},
+			textShadow: {
+				'glow': 'var(--shadow-glow)',
+				'stroke': 'var(--shadow-text)',
 			},
 			transitionTimingFunction: {
 				'smooth': 'var(--transition-smooth)',
 				'bounce': 'var(--transition-bounce)',
+				'cinematic': 'var(--transition-cinematic)',
 			},
 			keyframes: {
 				'accordion-down': {

@@ -1,46 +1,48 @@
 import { Button } from "@/components/ui/button";
-import { Lightbulb, Plus, Menu } from "lucide-react";
+import { Film, Target, Menu } from "lucide-react";
 
 const Header = () => {
   return (
-    <header className="border-b border-border/50 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
+    <header className="fixed top-0 z-50 w-full bg-background/95 backdrop-blur border-b border-primary/20">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+        {/* Kill Bill inspired logo */}
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center shadow-glow">
-            <Lightbulb className="w-5 h-5 text-white" />
+          <div className="w-10 h-10 bg-primary flex items-center justify-center transform -skew-x-12 shadow-glow">
+            <Film className="w-5 h-5 text-primary-foreground" />
           </div>
           <div className="flex flex-col">
-            <span className="text-xl font-bold text-foreground">
-              StartupIdea.AI
+            <span className="font-bebas text-xl tracking-wider text-foreground">
+              STARTUP.KILL
             </span>
-            <span className="text-xs text-muted-foreground font-medium">
-              Innovation Engine
+            <span className="font-mono text-xs text-primary tracking-widest leading-none">
+              IDEA_PRODUCTION
             </span>
           </div>
         </div>
         
+        {/* Cinematic navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <a href="#ideas" className="text-muted-foreground hover:text-primary transition-smooth font-medium relative group">
-            Ideas
-            <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary group-hover:w-full transition-all duration-300" />
+          <a href="#ideas" className="font-oswald text-sm font-medium text-foreground/80 hover:text-primary transition-cinematic tracking-wider uppercase relative group">
+            ARSENAL
+            <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
           </a>
-          <a href="#categories" className="text-muted-foreground hover:text-primary transition-smooth font-medium relative group">
-            Categories
-            <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary group-hover:w-full transition-all duration-300" />
+          <a href="#categories" className="font-oswald text-sm font-medium text-foreground/80 hover:text-primary transition-cinematic tracking-wider uppercase relative group">
+            TARGETS
+            <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
           </a>
-          <a href="#about" className="text-muted-foreground hover:text-primary transition-smooth font-medium relative group">
-            About
-            <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary group-hover:w-full transition-all duration-300" />
+          <a href="#about" className="font-oswald text-sm font-medium text-foreground/80 hover:text-primary transition-cinematic tracking-wider uppercase relative group">
+            MISSION
+            <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
           </a>
         </nav>
 
         <div className="flex items-center space-x-3">
-          <Button variant="default" className="bg-gradient-primary hover:shadow-glow transition-bounce text-white font-semibold hidden sm:flex">
-            <Plus className="w-4 h-4 mr-2" />
-            Generate Idea
+          <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-bebas text-sm tracking-wider transform -skew-x-6 transition-cinematic shadow-card hidden sm:flex">
+            <Target className="w-4 h-4 mr-2" />
+            STRIKE NOW
           </Button>
           
-          <Button variant="ghost" size="sm" className="md:hidden">
+          <Button variant="ghost" size="sm" className="md:hidden text-primary">
             <Menu className="w-4 h-4" />
           </Button>
         </div>

@@ -1,71 +1,77 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Brain, TrendingUp, Lightbulb, Sparkles, Zap } from "lucide-react";
+import { ArrowRight, Play, Film, Target } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
   const navigate = useNavigate();
   
   return (
-    <section className="relative py-24 md:py-32 bg-gradient-hero overflow-hidden">
-      {/* Floating orbs */}
-      <div className="absolute top-20 left-[10%] w-72 h-72 bg-gradient-primary rounded-full opacity-20 blur-3xl animate-pulse" />
-      <div className="absolute bottom-20 right-[10%] w-96 h-96 bg-gradient-primary rounded-full opacity-10 blur-3xl animate-pulse delay-1000" />
+    <section className="relative min-h-screen bg-gradient-hero overflow-hidden letterbox film-grain">
+      {/* Yellow geometric accents */}
+      <div className="absolute top-0 left-0 w-2 h-full bg-gradient-primary opacity-80" />
+      <div className="absolute top-0 right-0 w-2 h-full bg-gradient-primary opacity-80" />
+      <div className="absolute top-1/4 left-1/4 w-32 h-1 bg-primary rotate-45 opacity-60" />
+      <div className="absolute bottom-1/3 right-1/3 w-24 h-1 bg-primary -rotate-45 opacity-60" />
       
-      {/* Grid pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
+      {/* Neon glow effects */}
+      <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse" />
       
       {/* Content */}
-      <div className="relative container mx-auto px-4 text-center">
-        <div className="max-w-5xl mx-auto">
-          {/* Badge */}
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-glass border border-primary/20 backdrop-blur-sm mb-8 shadow-glow">
-            <Sparkles className="w-4 h-4 mr-2 text-primary" />
-            <span className="text-sm font-medium bg-gradient-primary bg-clip-text text-transparent">
-              AI-Powered Innovation Engine
-            </span>
+      <div className="relative container mx-auto px-4 flex items-center justify-center min-h-screen">
+        <div className="max-w-6xl mx-auto text-center">
+          {/* Movie-style badge */}
+          <div className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground font-mono text-sm font-bold tracking-wider mb-8 transform -skew-x-12 shadow-card">
+            <Film className="w-4 h-4 mr-2" />
+            STARTUP IDEA PRODUCTION
           </div>
           
-          {/* Headline */}
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-[1.1] tracking-tight">
-            <span className="text-foreground">Transform Ideas Into</span>
-            <br />
-            <span className="bg-gradient-primary bg-clip-text text-transparent relative">
-              Startup Success
-              <div className="absolute -inset-1 bg-gradient-primary opacity-20 blur-2xl rounded-lg" />
-            </span>
+          {/* Cinematic Headline */}
+          <h1 className="font-bebas text-6xl md:text-8xl lg:text-9xl leading-[0.9] tracking-wider mb-8 uppercase">
+            <span className="text-foreground block">KILL YOUR</span>
+            <span className="text-primary neon-glow block text-stroke">COMPETITION</span>
+            <span className="text-foreground block">WITH IDEAS</span>
           </h1>
           
-          {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed font-light">
-            Discover meticulously crafted startup concepts with comprehensive market intelligence, 
-            validated business models, and executable implementation roadmaps.
-          </p>
+          {/* Subtitle with film strip styling */}
+          <div className="relative max-w-4xl mx-auto mb-12">
+            <div className="absolute -left-8 top-0 bottom-0 w-4 bg-gradient-primary opacity-20"></div>
+            <div className="absolute -right-8 top-0 bottom-0 w-4 bg-gradient-primary opacity-20"></div>
+            <p className="text-xl md:text-2xl text-muted-foreground font-oswald font-light leading-relaxed px-8">
+              BOLD STARTUP CONCEPTS • MARKET DOMINATION STRATEGIES • EXECUTION BLUEPRINTS
+            </p>
+          </div>
           
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-20">
+          {/* CTA Buttons - Kill Bill style */}
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Button 
               size="lg"
-              className="bg-gradient-primary hover:shadow-hero transition-bounce shadow-glow text-white font-semibold px-8 py-4 h-auto text-lg relative group overflow-hidden"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-bebas text-xl tracking-wider px-12 py-6 h-auto transform -skew-x-6 transition-cinematic shadow-hero group relative overflow-hidden"
               onClick={() => navigate('/idea/AI-Powered Personal Finance Assistant')}
             >
-              <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12" />
-              <Zap className="w-5 h-5 mr-2" />
-              Explore Today's Idea
-              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+              <Target className="w-6 h-6 mr-3" />
+              STRIKE FIRST
+              <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform" />
             </Button>
             
             <Button 
               variant="outline" 
               size="lg"
-              className="border-primary/30 hover:bg-primary/5 hover:border-primary/50 transition-smooth backdrop-blur-sm bg-gradient-glass px-8 py-4 h-auto text-lg font-semibold"
+              className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-bebas text-xl tracking-wider px-12 py-6 h-auto transform skew-x-6 transition-cinematic bg-transparent group"
               onClick={() => {
                 document.getElementById('explore-categories')?.scrollIntoView({ 
                   behavior: 'smooth' 
                 });
               }}
             >
-              Browse Categories
+              <Play className="w-6 h-6 mr-3" />
+              BROWSE ARSENAL
             </Button>
+          </div>
+          
+          {/* Kill Bill style quote */}
+          <div className="mt-16 font-mono text-sm text-muted-foreground tracking-widest opacity-60">
+            "REVENGE IS A DISH BEST SERVED COLD... BUT STARTUP SUCCESS IS BEST SERVED NOW"
           </div>
         </div>
       </div>

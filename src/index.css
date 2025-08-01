@@ -2,54 +2,64 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* KILL BILL CINEMATIC DESIGN SYSTEM
+Colors: Electric Yellow (#FFD700) + Pure Black
+Typography: Bebas Neue (headers), Oswald (body), JetBrains Mono (tech)
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 230 15% 15%;
+    /* Kill Bill Black & Yellow Theme */
+    --background: 0 0% 8%;
+    --foreground: 60 100% 85%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 230 15% 15%;
+    --card: 0 0% 12%;
+    --card-foreground: 60 100% 85%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 230 15% 15%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 60 100% 85%;
 
-    --primary: 250 84% 60%;
-    --primary-foreground: 0 0% 100%;
+    /* Electric Yellow Primary */
+    --primary: 51 100% 50%;
+    --primary-foreground: 0 0% 8%;
 
-    --secondary: 240 6% 97%;
-    --secondary-foreground: 230 15% 15%;
+    /* Dark Secondary */
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 60 100% 85%;
 
-    --muted: 240 6% 97%;
-    --muted-foreground: 230 8% 45%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 60 20% 60%;
 
-    --accent: 240 6% 97%;
-    --accent-foreground: 230 15% 15%;
+    --accent: 51 100% 50%;
+    --accent-foreground: 0 0% 8%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 240 6% 92%;
-    --input: 240 6% 92%;
-    --ring: 250 84% 60%;
+    --border: 0 0% 20%;
+    --input: 0 0% 15%;
+    --ring: 51 100% 50%;
 
-    /* Outstanding design system */
-    --gradient-primary: linear-gradient(135deg, hsl(250 84% 60%), hsl(280 70% 65%));
-    --gradient-secondary: linear-gradient(135deg, hsl(240 100% 98%), hsl(240 6% 97%));
-    --gradient-accent: linear-gradient(135deg, hsl(250 84% 60% / 0.03), hsl(280 70% 65% / 0.03));
-    --gradient-hero: linear-gradient(135deg, hsl(240 100% 99%), hsl(250 100% 98%), hsl(240 6% 97%));
-    --gradient-glass: linear-gradient(135deg, hsl(0 0% 100% / 0.7), hsl(240 6% 97% / 0.3));
+    /* CINEMATIC GRADIENTS */
+    --gradient-primary: linear-gradient(135deg, hsl(51 100% 50%), hsl(45 100% 60%));
+    --gradient-secondary: linear-gradient(135deg, hsl(0 0% 8%), hsl(0 0% 15%));
+    --gradient-accent: linear-gradient(135deg, hsl(51 100% 50% / 0.1), hsl(45 100% 60% / 0.05));
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 6%), hsl(0 0% 10%), hsl(0 0% 8%));
+    --gradient-glass: linear-gradient(135deg, hsl(0 0% 12% / 0.8), hsl(0 0% 8% / 0.9));
+    --gradient-film: linear-gradient(90deg, transparent 0%, hsl(0 0% 0%) 2%, hsl(0 0% 0%) 98%, transparent 100%);
     
-    --shadow-glow: 0 8px 32px hsl(250 84% 60% / 0.15);
-    --shadow-card: 0 2px 8px hsl(230 15% 15% / 0.04), 0 1px 3px hsl(230 15% 15% / 0.06);
-    --shadow-elevated: 0 8px 24px hsl(230 15% 15% / 0.08), 0 4px 8px hsl(230 15% 15% / 0.03);
-    --shadow-hero: 0 20px 40px hsl(250 84% 60% / 0.1);
+    /* CINEMATIC SHADOWS & EFFECTS */
+    --shadow-glow: 0 0 40px hsl(51 100% 50% / 0.6), 0 0 80px hsl(51 100% 50% / 0.3);
+    --shadow-card: 0 8px 32px hsl(0 0% 0% / 0.8), 0 0 20px hsl(51 100% 50% / 0.1);
+    --shadow-elevated: 0 16px 64px hsl(0 0% 0% / 0.9), 0 0 40px hsl(51 100% 50% / 0.2);
+    --shadow-hero: 0 24px 96px hsl(0 0% 0% / 0.9), 0 0 60px hsl(51 100% 50% / 0.4);
+    --shadow-text: 2px 2px 0px hsl(0 0% 0%), -2px -2px 0px hsl(0 0% 0%);
     
-    --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    /* CINEMATIC TRANSITIONS */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-cinematic: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
     --radius: 0.5rem;
 
@@ -70,38 +80,52 @@ All colors MUST be HSL.
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
-  .dark {
-    --background: 235 20% 8%;
-    --foreground: 240 6% 95%;
+}
 
-    --card: 235 20% 10%;
-    --card-foreground: 240 6% 95%;
-
-    --popover: 235 20% 10%;
-    --popover-foreground: 240 6% 95%;
-
-    --primary: 250 84% 60%;
-    --primary-foreground: 235 20% 8%;
-
-    --secondary: 235 15% 15%;
-    --secondary-foreground: 240 6% 95%;
-
-    --muted: 235 15% 15%;
-    --muted-foreground: 235 8% 60%;
-
-    --accent: 235 15% 15%;
-    --accent-foreground: 240 6% 95%;
-
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 240 6% 95%;
-
-    --border: 235 15% 15%;
-    --input: 235 15% 15%;
-    --ring: 250 84% 60%;
-
-    /* Dark mode gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(235 20% 8%), hsl(235 15% 12%), hsl(235 15% 15%));
-    --gradient-glass: linear-gradient(135deg, hsl(235 20% 10% / 0.7), hsl(235 15% 15% / 0.3));
+/* CINEMATIC UTILITY CLASSES */
+@layer components {
+  .text-stroke {
+    -webkit-text-stroke: 2px hsl(var(--primary-foreground));
+    text-stroke: 2px hsl(var(--primary-foreground));
+  }
+  
+  .letterbox {
+    position: relative;
+  }
+  
+  .letterbox::before,
+  .letterbox::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: var(--gradient-film);
+    z-index: 10;
+    pointer-events: none;
+  }
+  
+  .letterbox::before {
+    top: 0;
+  }
+  
+  .letterbox::after {
+    bottom: 0;
+  }
+  
+  .film-grain {
+    background-image: 
+      radial-gradient(circle at 25% 25%, hsl(51 100% 50% / 0.02) 1px, transparent 1px),
+      radial-gradient(circle at 75% 75%, hsl(51 100% 50% / 0.02) 1px, transparent 1px);
+    background-size: 4px 4px;
+  }
+  
+  .neon-glow {
+    text-shadow: 
+      0 0 5px hsl(var(--primary)),
+      0 0 10px hsl(var(--primary)),
+      0 0 15px hsl(var(--primary)),
+      0 0 20px hsl(var(--primary));
   }
 }
 
@@ -111,6 +135,10 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-oswald;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bebas tracking-wider;
   }
 }

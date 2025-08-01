@@ -40,27 +40,36 @@ const mockStartupIdeas = [
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background film-grain">
       <Header />
       <Hero />
       
       <StatsSection />
       
-      {/* Featured Ideas Section */}
+      {/* Featured Ideas Section - Kill Bill style */}
       <section className="py-20 px-4 relative">
-        {/* Background decoration */}
-        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-px h-20 bg-gradient-to-b from-primary/50 to-transparent" />
+        {/* Yellow accent lines */}
+        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-primary" />
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-1 h-20 bg-primary" />
         
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
-              Today's Featured
-              <span className="bg-gradient-primary bg-clip-text text-transparent"> Ideas</span>
+            <h2 className="font-bebas text-5xl md:text-7xl mb-6 text-foreground tracking-wider uppercase">
+              TODAY'S
+              <span className="text-primary neon-glow block"> KILL LIST</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-light">
-              Meticulously curated startup concepts with comprehensive market validation, 
-              detailed competitive analysis, and executable business strategies.
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-oswald">
+              ELITE STARTUP CONCEPTS • MARKET DOMINATION STRATEGIES • EXECUTION BLUEPRINTS
             </p>
+            
+            {/* Film strip decoration */}
+            <div className="flex justify-center mt-8">
+              <div className="flex space-x-1">
+                {[...Array(5)].map((_, i) => (
+                  <div key={i} className="w-3 h-8 bg-primary/20 border border-primary/40" />
+                ))}
+              </div>
+            </div>
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
@@ -76,28 +85,33 @@ const Index = () => {
       
       <CategoryGrid />
       
-      {/* Footer */}
-      <footer className="py-16 border-t border-border/50 bg-gradient-accent relative overflow-hidden">
-        {/* Background decoration */}
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+      {/* Kill Bill Footer */}
+      <footer className="py-16 border-t-2 border-primary bg-gradient-secondary relative overflow-hidden">
+        {/* Yellow accent line */}
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-primary" />
         
         <div className="container mx-auto px-4 text-center relative">
-          <div className="flex items-center justify-center space-x-3 mb-6">
-            <div className="w-8 h-8 bg-gradient-primary rounded-xl flex items-center justify-center shadow-glow">
-              <span className="text-white text-sm font-bold">S</span>
+          <div className="flex items-center justify-center space-x-4 mb-6">
+            <div className="w-12 h-12 bg-primary flex items-center justify-center transform -skew-x-12 shadow-glow">
+              <span className="text-primary-foreground font-bebas text-xl">S</span>
             </div>
             <div className="flex flex-col items-start">
-              <span className="text-xl font-bold text-foreground">
-                StartupIdea.AI
+              <span className="font-bebas text-2xl text-foreground tracking-wider">
+                STARTUP.KILL
               </span>
-              <span className="text-xs text-muted-foreground">
-                Innovation Engine
+              <span className="font-mono text-xs text-primary tracking-widest">
+                IDEA_PRODUCTION_STUDIO
               </span>
             </div>
           </div>
-          <p className="text-muted-foreground font-light text-lg">
-            Generating the future, one revolutionary idea at a time.
+          <p className="text-muted-foreground font-oswald text-lg tracking-wider uppercase">
+            "REVENGE IS SWEET, BUT STARTUP SUCCESS IS SWEETER"
           </p>
+          
+          {/* Kill Bill style quote attribution */}
+          <div className="mt-4 font-mono text-xs text-primary/60 tracking-widest">
+            — THE BRIDE, VOLUME 3
+          </div>
         </div>
       </footer>
     </div>
