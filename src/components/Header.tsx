@@ -1,14 +1,15 @@
 import { Button } from "@/components/ui/button";
-import { Film, Target, Menu } from "lucide-react";
+import { Lightbulb, Target, Menu } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <header className="fixed top-0 z-50 w-full bg-background/95 backdrop-blur border-b border-primary/20">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        {/* Kill Bill inspired logo */}
-        <div className="flex items-center space-x-3">
+        {/* Logo with lightbulb */}
+        <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-cinematic">
           <div className="w-10 h-10 bg-primary flex items-center justify-center transform -skew-x-12 shadow-glow">
-            <Film className="w-5 h-5 text-primary-foreground" />
+            <Lightbulb className="w-5 h-5 text-primary-foreground" />
           </div>
           <div className="flex flex-col">
             <span className="font-bebas text-xl tracking-wider text-foreground">
@@ -18,7 +19,7 @@ const Header = () => {
               INNOVATION_ENGINE
             </span>
           </div>
-        </div>
+        </Link>
         
         {/* Cinematic navigation */}
         <nav className="hidden md:flex items-center space-x-8">
