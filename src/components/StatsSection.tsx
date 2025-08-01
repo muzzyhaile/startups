@@ -1,46 +1,51 @@
-import { Brain, TrendingUp, Users, Rocket } from "lucide-react";
+import { Target, Crosshair, Sword, Zap } from "lucide-react";
 
 const stats = [
   {
-    icon: Brain,
+    icon: Target,
     value: "500+",
-    label: "Ideas Generated",
-    description: "Curated startup concepts"
+    label: "TARGETS ACQUIRED",
+    description: "Elite startup concepts"
   },
   {
-    icon: TrendingUp,
+    icon: Crosshair,
     value: "95%",
-    label: "Market Viability",
-    description: "Validated opportunities"
+    label: "PRECISION RATE",
+    description: "Market validated hits"
   },
   {
-    icon: Users,
+    icon: Sword,
     value: "10K+",
-    label: "Entrepreneurs",
-    description: "Building the future"
+    label: "WARRIORS ARMED",
+    description: "Ready for battle"
   },
   {
-    icon: Rocket,
+    icon: Zap,
     value: "$2B+",
-    label: "Market Potential",
-    description: "Combined opportunity size"
+    label: "KILL POTENTIAL",
+    description: "Combined market domination"
   }
 ];
 
 const StatsSection = () => {
   return (
-    <section className="py-20 relative overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute inset-0 bg-gradient-accent" />
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-primary opacity-5 rounded-full blur-3xl" />
+    <section className="py-20 relative overflow-hidden bg-gradient-secondary film-grain">
+      {/* Yellow accent lines */}
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-primary" />
+      <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-primary" />
+      
+      {/* Geometric yellow accents */}
+      <div className="absolute top-10 left-10 w-16 h-1 bg-primary rotate-45 opacity-60" />
+      <div className="absolute bottom-10 right-10 w-20 h-1 bg-primary -rotate-45 opacity-60" />
       
       <div className="relative container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
-            Powering Innovation Worldwide
+          <h2 className="font-bebas text-5xl md:text-7xl mb-6 text-foreground tracking-wider uppercase">
+            BATTLE
+            <span className="text-primary neon-glow block"> STATISTICS</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Join thousands of entrepreneurs who've discovered their next big opportunity through our AI-powered platform.
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-oswald tracking-wide">
+            MISSION INTEL • PRECISION STRIKES • MARKET DOMINATION
           </p>
         </div>
         
@@ -52,17 +57,17 @@ const StatsSection = () => {
                 key={index}
                 className="text-center group cursor-pointer"
               >
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-glass border border-primary/10 mb-4 group-hover:shadow-glow group-hover:scale-110 transition-bounce">
-                  <IconComponent className="w-7 h-7 text-primary" />
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-primary transform -skew-x-12 mb-4 group-hover:shadow-glow group-hover:scale-110 transition-cinematic">
+                  <IconComponent className="w-7 h-7 text-primary-foreground" />
                 </div>
-                <div className="space-y-1">
-                  <div className="text-3xl md:text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                <div className="space-y-2">
+                  <div className="font-bebas text-4xl md:text-5xl text-primary neon-glow tracking-wider">
                     {stat.value}
                   </div>
-                  <div className="font-semibold text-foreground">
+                  <div className="font-bebas text-lg text-foreground tracking-wider">
                     {stat.label}
                   </div>
-                  <div className="text-sm text-muted-foreground">
+                  <div className="font-mono text-xs text-muted-foreground tracking-wider uppercase">
                     {stat.description}
                   </div>
                 </div>
