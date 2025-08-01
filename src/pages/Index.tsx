@@ -56,10 +56,10 @@ const Index = () => {
           <div className="text-center mb-16">
             <h2 className="font-bebas text-5xl md:text-7xl mb-6 text-foreground tracking-wider uppercase">
               TODAY'S
-              <span className="text-primary neon-glow block"> KILL LIST</span>
+              <span className="text-primary neon-glow block"> FEATURED IDEA</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-oswald">
-              ELITE STARTUP CONCEPTS • MARKET DOMINATION STRATEGIES • EXECUTION BLUEPRINTS
+              FRESH STARTUP CONCEPTS • MARKET INSIGHTS • EXECUTION ROADMAPS
             </p>
             
             {/* Film strip decoration */}
@@ -105,13 +105,8 @@ const Index = () => {
             </div>
           </div>
           <p className="text-muted-foreground font-oswald text-lg tracking-wider uppercase">
-            "REVENGE IS SWEET, BUT STARTUP SUCCESS IS SWEETER"
+            "ONE FRESH STARTUP IDEA DELIVERED DAILY"
           </p>
-          
-          {/* Kill Bill style quote attribution */}
-          <div className="mt-4 font-mono text-xs text-primary/60 tracking-widest">
-            — THE BRIDE, VOLUME 3
-          </div>
         </div>
       </footer>
     </div>

@@ -19,29 +19,29 @@ const Hero = () => {
       {/* Content */}
       <div className="relative container mx-auto px-4 flex items-center justify-center min-h-screen">
         <div className="max-w-6xl mx-auto text-center">
-          {/* Movie-style badge */}
+          {/* Badge */}
           <div className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground font-mono text-sm font-bold tracking-wider mb-8 transform -skew-x-12 shadow-card">
-            <Film className="w-4 h-4 mr-2" />
-            STARTUP IDEA PRODUCTION
+            <Target className="w-4 h-4 mr-2" />
+            DAILY STARTUP IDEAS
           </div>
           
-          {/* Cinematic Headline */}
+          {/* Headline */}
           <h1 className="font-bebas text-6xl md:text-8xl lg:text-9xl leading-[0.9] tracking-wider mb-8 uppercase">
-            <span className="text-foreground block">KILL YOUR</span>
-            <span className="text-primary neon-glow block text-stroke">COMPETITION</span>
-            <span className="text-foreground block">WITH IDEAS</span>
+            <span className="text-foreground block">ONE IDEA</span>
+            <span className="text-primary neon-glow block text-stroke">EVERY DAY</span>
+            <span className="text-foreground block">THAT'S IT</span>
           </h1>
           
-          {/* Subtitle with film strip styling */}
+          {/* Subtitle */}
           <div className="relative max-w-4xl mx-auto mb-12">
             <div className="absolute -left-8 top-0 bottom-0 w-4 bg-gradient-primary opacity-20"></div>
             <div className="absolute -right-8 top-0 bottom-0 w-4 bg-gradient-primary opacity-20"></div>
             <p className="text-xl md:text-2xl text-muted-foreground font-oswald font-light leading-relaxed px-8">
-              BOLD STARTUP CONCEPTS • MARKET DOMINATION STRATEGIES • EXECUTION BLUEPRINTS
+              FRESH STARTUP CONCEPTS • MARKET INSIGHTS • EXECUTION ROADMAPS
             </p>
           </div>
           
-          {/* CTA Buttons - Kill Bill style */}
+          {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Button 
               size="lg"
@@ -50,7 +50,7 @@ const Hero = () => {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
               <Target className="w-6 h-6 mr-3" />
-              STRIKE FIRST
+              TODAY'S IDEA
               <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform" />
             </Button>
             
@@ -65,13 +65,13 @@ const Hero = () => {
               }}
             >
               <Play className="w-6 h-6 mr-3" />
-              BROWSE ARSENAL
+              BROWSE IDEAS
             </Button>
           </div>
           
-          {/* Kill Bill style quote */}
+          {/* Simple tagline */}
           <div className="mt-16 font-mono text-sm text-muted-foreground tracking-widest opacity-60">
-            "REVENGE IS A DISH BEST SERVED COLD... BUT STARTUP SUCCESS IS BEST SERVED NOW"
+            "ONE FRESH STARTUP IDEA DELIVERED DAILY"
           </div>
         </div>
       </div>

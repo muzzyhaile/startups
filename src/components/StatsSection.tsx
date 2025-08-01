@@ -3,27 +3,27 @@ import { Target, Crosshair, Sword, Zap } from "lucide-react";
 const stats = [
   {
     icon: Target,
-    value: "500+",
-    label: "TARGETS ACQUIRED",
-    description: "Elite startup concepts"
+    value: "365+",
+    label: "IDEAS DELIVERED",
+    description: "Fresh concepts daily"
   },
   {
     icon: Crosshair,
     value: "95%",
-    label: "PRECISION RATE",
-    description: "Market validated hits"
+    label: "MARKET VALIDATED",
+    description: "Research-backed opportunities"
   },
   {
     icon: Sword,
     value: "10K+",
-    label: "WARRIORS ARMED",
-    description: "Ready for battle"
+    label: "ENTREPRENEURS",
+    description: "Building the future"
   },
   {
     icon: Zap,
     value: "$2B+",
-    label: "KILL POTENTIAL",
-    description: "Combined market domination"
+    label: "MARKET POTENTIAL",
+    description: "Combined opportunity size"
   }
 ];
 
@@ -41,11 +41,11 @@ const StatsSection = () => {
       <div className="relative container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="font-bebas text-5xl md:text-7xl mb-6 text-foreground tracking-wider uppercase">
-            BATTLE
-            <span className="text-primary neon-glow block"> STATISTICS</span>
+            DAILY
+            <span className="text-primary neon-glow block"> IMPACT</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-oswald tracking-wide">
-            MISSION INTEL • PRECISION STRIKES • MARKET DOMINATION
+            ONE IDEA • DAILY DELIVERY • ENDLESS POSSIBILITIES
           </p>
         </div>
         

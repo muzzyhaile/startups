@@ -95,11 +95,11 @@ const CategoryGrid = () => {
       <div className="container mx-auto relative">
         <div className="text-center mb-16">
           <h2 className="font-bebas text-5xl md:text-7xl mb-6 text-foreground tracking-wider uppercase">
-            CHOOSE YOUR
-            <span className="text-primary neon-glow block"> WEAPON</span>
+            EXPLORE
+            <span className="text-primary neon-glow block"> CATEGORIES</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-oswald tracking-wide">
-            SELECT YOUR BATTLEFIELD • IDENTIFY YOUR TARGET • EXECUTE WITH PRECISION
+            DISCOVER IDEAS • FIND YOUR NICHE • START BUILDING
           </p>
           
           {/* Film strip decoration */}
@@ -141,7 +141,7 @@ const CategoryGrid = () => {
                   </h3>
                   
                   <p className="font-mono text-xs text-muted-foreground tracking-wider uppercase">
-                    {category.count} TARGETS
+                    {category.count} IDEAS
                   </p>
                 </CardContent>
               </Card>
