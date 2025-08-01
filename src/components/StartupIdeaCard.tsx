@@ -43,47 +43,52 @@ const StartupIdeaCard = ({
 
   return (
     <Card 
-      className={`group transition-smooth hover:shadow-elevated cursor-pointer ${
+      className={`group transition-bounce hover:shadow-hero cursor-pointer relative overflow-hidden ${
         featured 
-          ? "border-primary/20 bg-gradient-accent" 
-          : "border-border hover:border-primary/20"
+          ? "border-primary/30 bg-gradient-glass shadow-glow" 
+          : "border-border hover:border-primary/30 hover:shadow-elevated"
       }`}
       onClick={() => {
         navigate(`/idea/${encodeURIComponent(title)}`);
       }}
     >
+      {/* Shine effect */}
+      {featured && (
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+      )}
+      
       <CardHeader className="space-y-4">
         <div className="flex items-start justify-between">
-          <div className="space-y-2">
+          <div className="space-y-3">
             <div className="flex items-center gap-2">
-              <Badge variant="outline" className="text-xs">
+              <Badge variant="outline" className="text-xs font-medium bg-primary/5 border-primary/20 text-primary">
                 {category}
               </Badge>
               <Badge 
                 variant="outline" 
-                className={`text-xs ${getDifficultyColor(difficulty)}`}
+                className={`text-xs font-medium ${getDifficultyColor(difficulty)}`}
               >
                 {difficulty}
               </Badge>
               {featured && (
-                <Badge className="bg-primary text-primary-foreground text-xs">
-                  Today's Featured
+                <Badge className="bg-gradient-primary text-white text-xs font-semibold shadow-glow">
+                  ✨ Featured Today
                 </Badge>
               )}
             </div>
           </div>
           
-          <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-            <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+          <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-smooth">
+            <Button variant="ghost" size="sm" className="h-8 w-8 p-0 hover:bg-primary/10">
               <BookmarkPlus className="w-4 h-4" />
             </Button>
-            <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+            <Button variant="ghost" size="sm" className="h-8 w-8 p-0 hover:bg-primary/10">
               <Share2 className="w-4 h-4" />
             </Button>
           </div>
         </div>
         
-        <CardTitle className="text-xl leading-tight group-hover:text-primary transition-colors">
+        <CardTitle className="text-xl leading-tight group-hover:text-primary transition-smooth font-bold">
           {title}
         </CardTitle>
       </CardHeader>
@@ -128,14 +133,15 @@ const StartupIdeaCard = ({
         </div>
         
         <Button 
-          className="w-full bg-primary hover:bg-primary/90 transition-smooth"
+          className="w-full bg-gradient-primary hover:shadow-glow transition-bounce text-white font-semibold relative group overflow-hidden"
           size="lg"
           onClick={(e) => {
             e.stopPropagation();
             navigate(`/idea/${encodeURIComponent(title)}`);
           }}
         >
-          View Full Analysis
+          <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 skew-x-12" />
+          <span className="relative">View Full Analysis</span>
         </Button>
       </CardContent>
     </Card>

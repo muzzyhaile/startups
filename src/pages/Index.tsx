@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import StartupIdeaCard from "@/components/StartupIdeaCard";
 import CategoryGrid from "@/components/CategoryGrid";
+import StatsSection from "@/components/StatsSection";
 
 const mockStartupIdeas = [
   {
@@ -43,19 +44,26 @@ const Index = () => {
       <Header />
       <Hero />
       
+      <StatsSection />
+      
       {/* Featured Ideas Section */}
-      <section className="py-16 px-4">
+      <section className="py-20 px-4 relative">
+        {/* Background decoration */}
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-px h-20 bg-gradient-to-b from-primary/50 to-transparent" />
+        
         <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Today's Featured Ideas
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+              Today's Featured
+              <span className="bg-gradient-primary bg-clip-text text-transparent"> Ideas</span>
             </h2>
-            <p className="text-foreground/70 text-lg max-w-2xl mx-auto">
-              Carefully curated startup concepts with detailed market analysis and implementation strategies.
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-light">
+              Meticulously curated startup concepts with comprehensive market validation, 
+              detailed competitive analysis, and executable business strategies.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
             {mockStartupIdeas.map((idea, index) => (
               <StartupIdeaCard
                 key={index}
@@ -69,18 +77,26 @@ const Index = () => {
       <CategoryGrid />
       
       {/* Footer */}
-      <footer className="py-12 border-t border-border bg-secondary/30">
-        <div className="container mx-auto px-4 text-center">
-          <div className="flex items-center justify-center space-x-2 mb-4">
-            <div className="w-6 h-6 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground text-sm font-bold">S</span>
+      <footer className="py-16 border-t border-border/50 bg-gradient-accent relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+        
+        <div className="container mx-auto px-4 text-center relative">
+          <div className="flex items-center justify-center space-x-3 mb-6">
+            <div className="w-8 h-8 bg-gradient-primary rounded-xl flex items-center justify-center shadow-glow">
+              <span className="text-white text-sm font-bold">S</span>
             </div>
-            <span className="text-lg font-semibold text-foreground">
-              StartupIdea.AI
-            </span>
+            <div className="flex flex-col items-start">
+              <span className="text-xl font-bold text-foreground">
+                StartupIdea.AI
+              </span>
+              <span className="text-xs text-muted-foreground">
+                Innovation Engine
+              </span>
+            </div>
           </div>
-          <p className="text-muted-foreground">
-            Generating the future, one idea at a time.
+          <p className="text-muted-foreground font-light text-lg">
+            Generating the future, one revolutionary idea at a time.
           </p>
         </div>
       </footer>

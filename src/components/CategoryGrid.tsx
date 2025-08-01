@@ -20,85 +20,61 @@ const categories = [
     name: "AI & Technology",
     icon: Code,
     count: 45,
-    color: "text-blue-400",
-    bgColor: "bg-blue-500/10 border-blue-500/20",
   },
   {
     name: "E-commerce",
     icon: ShoppingCart,
     count: 38,
-    color: "text-green-400",
-    bgColor: "bg-green-500/10 border-green-500/20",
   },
   {
     name: "HealthTech",
     icon: Heart,
     count: 32,
-    color: "text-red-400",
-    bgColor: "bg-red-500/10 border-red-500/20",
   },
   {
     name: "EdTech",
     icon: GraduationCap,
     count: 28,
-    color: "text-purple-400",
-    bgColor: "bg-purple-500/10 border-purple-500/20",
   },
   {
     name: "Sustainability",
     icon: Leaf,
     count: 25,
-    color: "text-emerald-400",
-    bgColor: "bg-emerald-500/10 border-emerald-500/20",
   },
   {
     name: "FinTech",
     icon: TrendingUp,
     count: 42,
-    color: "text-yellow-400",
-    bgColor: "bg-yellow-500/10 border-yellow-500/20",
   },
   {
     name: "Cybersecurity",
     icon: Shield,
     count: 22,
-    color: "text-orange-400",
-    bgColor: "bg-orange-500/10 border-orange-500/20",
   },
   {
     name: "Gaming",
     icon: Gamepad2,
     count: 18,
-    color: "text-pink-400",
-    bgColor: "bg-pink-500/10 border-pink-500/20",
   },
   {
     name: "Mobile Apps",
     icon: Smartphone,
     count: 52,
-    color: "text-cyan-400",
-    bgColor: "bg-cyan-500/10 border-cyan-500/20",
   },
   {
     name: "Food & Beverage",
     icon: Utensils,
     count: 19,
-    color: "text-amber-400",
-    bgColor: "bg-amber-500/10 border-amber-500/20",
   },
   {
     name: "Transportation",
     icon: Car,
     count: 15,
-    color: "text-indigo-400",
-    bgColor: "bg-indigo-500/10 border-indigo-500/20",
   },
   {
     name: "Real Estate",
     icon: Home,
     count: 21,
-    color: "text-teal-400",
-    bgColor: "bg-teal-500/10 border-teal-500/20",
   },
 ];
 
@@ -106,41 +82,50 @@ const CategoryGrid = () => {
   const navigate = useNavigate();
 
   return (
-    <section id="explore-categories" className="py-16 px-4">
-      <div className="container mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Explore by Category
+    <section id="explore-categories" className="py-20 px-4 relative overflow-hidden">
+      {/* Background effects */}
+      <div className="absolute inset-0 bg-gradient-accent" />
+      <div className="absolute top-1/3 left-[20%] w-80 h-80 bg-gradient-primary opacity-5 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/3 right-[20%] w-60 h-60 bg-gradient-primary opacity-5 rounded-full blur-3xl" />
+      
+      <div className="container mx-auto relative">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+            Explore by 
+            <span className="bg-gradient-primary bg-clip-text text-transparent"> Category</span>
           </h2>
-          <p className="text-foreground/70 text-lg max-w-2xl mx-auto">
-            Browse startup ideas across different industries and find the perfect 
-            opportunity that matches your interests and expertise.
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-light">
+            Browse startup opportunities across diverse industries and discover 
+            the perfect match for your expertise and passion.
           </p>
         </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {categories.map((category) => {
             const IconComponent = category.icon;
             return (
               <Card 
                 key={category.name}
-                className={`border-border hover:border-primary/20 hover:shadow-card transition-smooth cursor-pointer group`}
+                className="border-border/50 hover:border-primary/30 hover:shadow-elevated transition-bounce cursor-pointer group relative overflow-hidden bg-gradient-glass backdrop-blur-sm"
                 onClick={() => {
                   navigate(`/category/${encodeURIComponent(category.name)}`);
                 }}
               >
-                <CardContent className="p-6 text-center">
+                {/* Hover effect */}
+                <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-5 transition-opacity" />
+                
+                <CardContent className="p-6 text-center relative">
                   <div className="flex justify-center mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-primary/5 flex items-center justify-center group-hover:bg-primary/10 transition-smooth">
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-primary/10 border border-primary/20 flex items-center justify-center group-hover:shadow-glow group-hover:scale-110 transition-bounce">
                       <IconComponent className="w-6 h-6 text-primary" />
                     </div>
                   </div>
                   
-                  <h3 className="font-semibold mb-2 text-foreground group-hover:text-primary transition-smooth">
+                  <h3 className="font-bold mb-2 text-foreground group-hover:text-primary transition-smooth">
                     {category.name}
                   </h3>
                   
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-muted-foreground font-medium">
                     {category.count} ideas
                   </p>
                 </CardContent>

@@ -1,52 +1,63 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Brain, TrendingUp, Lightbulb } from "lucide-react";
+import { ArrowRight, Brain, TrendingUp, Lightbulb, Sparkles, Zap } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
   const navigate = useNavigate();
   
   return (
-    <section className="relative py-20 md:py-32">
-      {/* Subtle background pattern */}
-      <div className="absolute inset-0 bg-gradient-accent" />
+    <section className="relative py-24 md:py-32 bg-gradient-hero overflow-hidden">
+      {/* Floating orbs */}
+      <div className="absolute top-20 left-[10%] w-72 h-72 bg-gradient-primary rounded-full opacity-20 blur-3xl animate-pulse" />
+      <div className="absolute bottom-20 right-[10%] w-96 h-96 bg-gradient-primary rounded-full opacity-10 blur-3xl animate-pulse delay-1000" />
+      
+      {/* Grid pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
       
       {/* Content */}
       <div className="relative container mx-auto px-4 text-center">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           {/* Badge */}
-          <div className="inline-flex items-center px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-sm font-medium mb-8">
-            <Lightbulb className="w-4 h-4 mr-2" />
-            AI-Powered Startup Ideas
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-glass border border-primary/20 backdrop-blur-sm mb-8 shadow-glow">
+            <Sparkles className="w-4 h-4 mr-2 text-primary" />
+            <span className="text-sm font-medium bg-gradient-primary bg-clip-text text-transparent">
+              AI-Powered Innovation Engine
+            </span>
           </div>
           
           {/* Headline */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-foreground">
-            Discover Your Next
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-[1.1] tracking-tight">
+            <span className="text-foreground">Transform Ideas Into</span>
             <br />
-            <span className="text-primary">Big Idea</span>
+            <span className="bg-gradient-primary bg-clip-text text-transparent relative">
+              Startup Success
+              <div className="absolute -inset-1 bg-gradient-primary opacity-20 blur-2xl rounded-lg" />
+            </span>
           </h1>
           
           {/* Subtitle */}
-          <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-            Access curated startup concepts with comprehensive market analysis, 
-            target audiences, and actionable implementation strategies.
+          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed font-light">
+            Discover meticulously crafted startup concepts with comprehensive market intelligence, 
+            validated business models, and executable implementation roadmaps.
           </p>
           
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-16">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-20">
             <Button 
               size="lg"
-              className="bg-primary hover:bg-primary/90 transition-smooth shadow-elevated px-8 py-3"
+              className="bg-gradient-primary hover:shadow-hero transition-bounce shadow-glow text-white font-semibold px-8 py-4 h-auto text-lg relative group overflow-hidden"
               onClick={() => navigate('/idea/AI-Powered Personal Finance Assistant')}
             >
+              <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12" />
+              <Zap className="w-5 h-5 mr-2" />
               Explore Today's Idea
-              <ArrowRight className="w-4 h-4 ml-2" />
+              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
             
             <Button 
               variant="outline" 
               size="lg"
-              className="border-border hover:bg-accent transition-smooth px-8 py-3"
+              className="border-primary/30 hover:bg-primary/5 hover:border-primary/50 transition-smooth backdrop-blur-sm bg-gradient-glass px-8 py-4 h-auto text-lg font-semibold"
               onClick={() => {
                 document.getElementById('explore-categories')?.scrollIntoView({ 
                   behavior: 'smooth' 
@@ -55,33 +66,6 @@ const Hero = () => {
             >
               Browse Categories
             </Button>
-          </div>
-          
-          {/* Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-xl mx-auto">
-            <div className="text-center">
-              <div className="flex items-center justify-center mb-2">
-                <Brain className="w-5 h-5 text-primary mr-2" />
-                <span className="text-2xl font-semibold text-foreground">500+</span>
-              </div>
-              <p className="text-muted-foreground text-sm">Ideas Generated</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="flex items-center justify-center mb-2">
-                <TrendingUp className="w-5 h-5 text-primary mr-2" />
-                <span className="text-2xl font-semibold text-foreground">95%</span>
-              </div>
-              <p className="text-muted-foreground text-sm">Market Viability</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="flex items-center justify-center mb-2">
-                <Lightbulb className="w-5 h-5 text-primary mr-2" />
-                <span className="text-2xl font-semibold text-foreground">Daily</span>
-              </div>
-              <p className="text-muted-foreground text-sm">Fresh Ideas</p>
-            </div>
           </div>
         </div>
       </div>
