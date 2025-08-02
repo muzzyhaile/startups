@@ -1,8 +1,12 @@
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import StartupIdeaCard from "@/components/StartupIdeaCard";
 import CategoryGrid from "@/components/CategoryGrid";
 import StatsSection from "@/components/StatsSection";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
+import { Loader2, RefreshCw, Download } from "lucide-react";
 
 const mockStartupIdeas = [
   {
@@ -39,6 +43,72 @@ const mockStartupIdeas = [
 ];
 
 const Index = () => {
+  const [startupIdeas, setStartupIdeas] = useState(mockStartupIdeas);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSyncing, setIsSyncing] = useState(false);
+  const { toast } = useToast();
+
+  // Fetch startup ideas from database
+  const fetchStartupIdeas = async () => {
+    try {
+      setIsLoading(true);
+      const response = await fetch('http://localhost:3001/api/startup-ideas');
+      if (response.ok) {
+        const data = await response.json();
+        if (data.length > 0) {
+          setStartupIdeas(data);
+          toast({
+            title: "Ideas Updated",
+            description: `Loaded ${data.length} startup ideas from database.`,
+          });
+        }
+      }
+    } catch (error) {
+      console.error('Failed to fetch startup ideas:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Manual sync function to trigger webhook
+  const syncIdeas = async () => {
+    try {
+      setIsSyncing(true);
+      toast({
+        title: "Syncing...",
+        description: "Fetching latest startup ideas from webhook.",
+      });
+      
+      const response = await fetch('http://localhost:3001/api/sync-ideas', {
+        method: 'POST',
+      });
+      
+      if (response.ok) {
+        await fetchStartupIdeas(); // Refresh the ideas after sync
+        toast({
+          title: "Sync Complete!",
+          description: "Successfully fetched and saved new startup ideas.",
+        });
+      } else {
+        throw new Error('Sync failed');
+      }
+    } catch (error) {
+      console.error('Sync failed:', error);
+      toast({
+        title: "Sync Failed",
+        description: "Could not sync startup ideas. Make sure the server is running.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSyncing(false);
+    }
+  };
+
+  // Load ideas on component mount
+  useEffect(() => {
+    fetchStartupIdeas();
+  }, []);
+
   return (
     <div className="min-h-screen bg-background film-grain">
       <Header />
@@ -69,6 +139,36 @@ const Index = () => {
                   <div key={i} className="w-3 h-8 bg-primary/20 border border-primary/40" />
                 ))}
               </div>
+            </div>
+            
+            {/* Manual Sync Button */}
+            <div className="flex justify-center gap-4 mt-8">
+              <Button
+                onClick={fetchStartupIdeas}
+                disabled={isLoading}
+                variant="outline"
+                className="font-oswald tracking-wider border-primary/50 hover:border-primary hover:bg-primary/10"
+              >
+                {isLoading ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : (
+                  <Download className="mr-2 h-4 w-4" />
+                )}
+                LOAD IDEAS
+              </Button>
+              
+              <Button
+                onClick={syncIdeas}
+                disabled={isSyncing}
+                className="font-oswald tracking-wider bg-primary hover:bg-primary/90 neon-glow"
+              >
+                {isSyncing ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : (
+                  <RefreshCw className="mr-2 h-4 w-4" />
+                )}
+                SYNC WEBHOOK
+              </Button>
             </div>
           </div>
           
