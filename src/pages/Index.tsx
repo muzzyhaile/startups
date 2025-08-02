@@ -6,103 +6,70 @@ import CategoryGrid from "@/components/CategoryGrid";
 import StatsSection from "@/components/StatsSection";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, RefreshCw, Download } from "lucide-react";
+import { Loader2, RefreshCw } from "lucide-react";
+import { createClient } from '@supabase/supabase-js';
 
-const mockStartupIdeas = [
-  {
-    title: "AI-Powered Personal Learning Assistant",
-    description: "An intelligent platform that creates personalized learning paths by analyzing individual learning patterns, preferences, and goals. Uses advanced AI to adapt content difficulty and teaching methods in real-time.",
-    category: "EdTech",
-    targetMarket: "Professionals & Students",
-    revenueModel: "Subscription",
-    marketSize: "$350B",
-    timeToMarket: "8-12 months",
-    difficulty: "Medium" as const,
-    featured: true,
-  },
-  {
-    title: "Sustainable Package Tracking Network",
-    description: "A blockchain-based system that tracks packages throughout their lifecycle while incentivizing sustainable delivery options and packaging materials through carbon credits and rewards.",
-    category: "Sustainability",
-    targetMarket: "E-commerce Retailers",
-    revenueModel: "Transaction Fees",
-    marketSize: "$15B",
-    timeToMarket: "12-18 months",
-    difficulty: "Hard" as const,
-  },
-  {
-    title: "Remote Team Wellness Platform",
-    description: "A comprehensive wellness platform designed specifically for remote teams, featuring virtual fitness classes, mental health resources, and team building activities with integrated analytics.",
-    category: "HealthTech",
-    targetMarket: "Remote Companies",
-    revenueModel: "B2B SaaS",
-    marketSize: "$80B",
-    timeToMarket: "6-9 months",
-    difficulty: "Easy" as const,
-  },
-];
+// Supabase client configuration
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://hxxjkmgznhhvvmpokfih.supabase.co';
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh4eGprbWd6bmhodnZtcG9rZmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjcyOTcxMTEsImV4cCI6MjA0Mjg3MzExMX0.NQgQz6SHPz6sGCEMAlnDNZmE6SQNT8HEa6-6q1WDZlE';
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 const Index = () => {
-  const [startupIdeas, setStartupIdeas] = useState(mockStartupIdeas);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSyncing, setIsSyncing] = useState(false);
+  const [startupIdeas, setStartupIdeas] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
 
-  // Fetch startup ideas from database
+  // Fetch startup ideas from Supabase
   const fetchStartupIdeas = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch('http://localhost:3001/api/startup-ideas');
-      if (response.ok) {
-        const data = await response.json();
-        if (data.length > 0) {
-          setStartupIdeas(data);
-          toast({
-            title: "Ideas Updated",
-            description: `Loaded ${data.length} startup ideas from database.`,
-          });
-        }
+      const { data, error } = await supabase
+        .from('startup_ideas')
+        .select('*')
+        .order('created_at', { ascending: false });
+      
+      if (error) {
+        throw error;
+      }
+      
+      if (data && data.length > 0) {
+        // Map database fields to component props
+        const mappedIdeas = data.map((idea: any) => ({
+          title: idea.title,
+          description: idea.description,
+          category: idea.category,
+          targetMarket: idea.target_market,
+          revenueModel: idea.revenue_model,
+          marketSize: idea.market_size,
+          timeToMarket: idea.time_to_market,
+          difficulty: idea.difficulty || 'Medium',
+          featured: idea.featured || false,
+        }));
+        
+        setStartupIdeas(mappedIdeas);
+        toast({
+          title: "Ideas Loaded",
+          description: `Loaded ${data.length} startup ideas from database.`,
+        });
+      } else {
+        toast({
+          title: "No Ideas Found",
+          description: "No startup ideas found in database. Check back later!",
+        });
       }
     } catch (error) {
       console.error('Failed to fetch startup ideas:', error);
+      toast({
+        title: "Error Loading Ideas",
+        description: "Could not load startup ideas from database.",
+        variant: "destructive",
+      });
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Manual sync function to trigger webhook
-  const syncIdeas = async () => {
-    try {
-      setIsSyncing(true);
-      toast({
-        title: "Syncing...",
-        description: "Fetching latest startup ideas from webhook.",
-      });
-      
-      const response = await fetch('http://localhost:3001/api/sync-ideas', {
-        method: 'POST',
-      });
-      
-      if (response.ok) {
-        await fetchStartupIdeas(); // Refresh the ideas after sync
-        toast({
-          title: "Sync Complete!",
-          description: "Successfully fetched and saved new startup ideas.",
-        });
-      } else {
-        throw new Error('Sync failed');
-      }
-    } catch (error) {
-      console.error('Sync failed:', error);
-      toast({
-        title: "Sync Failed",
-        description: "Could not sync startup ideas. Make sure the server is running.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSyncing(false);
-    }
-  };
+
 
   // Load ideas on component mount
   useEffect(() => {
@@ -111,7 +78,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background film-grain">
-      <Header />
+      <Header onGetTodaysIdea={fetchStartupIdeas} />
       <Hero />
       
       <StatsSection />
@@ -141,45 +108,30 @@ const Index = () => {
               </div>
             </div>
             
-            {/* Manual Sync Button */}
-            <div className="flex justify-center gap-4 mt-8">
-              <Button
-                onClick={fetchStartupIdeas}
-                disabled={isLoading}
-                variant="outline"
-                className="font-oswald tracking-wider border-primary/50 hover:border-primary hover:bg-primary/10"
-              >
-                {isLoading ? (
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                ) : (
-                  <Download className="mr-2 h-4 w-4" />
-                )}
-                LOAD IDEAS
-              </Button>
-              
-              <Button
-                onClick={syncIdeas}
-                disabled={isSyncing}
-                className="font-oswald tracking-wider bg-primary hover:bg-primary/90 neon-glow"
-              >
-                {isSyncing ? (
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                ) : (
-                  <RefreshCw className="mr-2 h-4 w-4" />
-                )}
-                SYNC WEBHOOK
-              </Button>
-            </div>
+
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-            {mockStartupIdeas.map((idea, index) => (
-              <StartupIdeaCard
-                key={index}
-                {...idea}
-              />
-            ))}
-          </div>
+          {/* Startup Ideas Grid */}
+          {isLoading ? (
+            <div className="flex justify-center items-center py-20">
+              <Loader2 className="h-12 w-12 animate-spin text-primary" />
+              <span className="ml-4 font-oswald text-xl text-muted-foreground tracking-wider">LOADING IDEAS...</span>
+            </div>
+          ) : startupIdeas.length > 0 ? (
+            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+              {startupIdeas.map((idea, index) => (
+                <StartupIdeaCard
+                  key={index}
+                  {...idea}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-20">
+              <h3 className="font-bebas text-3xl text-muted-foreground mb-4 tracking-wider">NO IDEAS YET</h3>
+              <p className="text-muted-foreground font-oswald">New startup ideas will appear here once your n8n workflow creates them!</p>
+            </div>
+          )}
         </div>
       </section>
       
