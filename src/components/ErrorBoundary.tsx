@@ -14,11 +14,11 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
   constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };
-    console.log('🛡️ ErrorBoundary: Initialized');
+
   }
 
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
-    console.error('🚨 ErrorBoundary: Error caught!', error);
+
     return {
       hasError: true,
       error
@@ -26,12 +26,6 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('❌ ErrorBoundary: Component error details:', {
-      error: error.message,
-      stack: error.stack,
-      componentStack: errorInfo.componentStack
-    });
-    
     this.setState({
       error,
       errorInfo
@@ -40,7 +34,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
 
   render() {
     if (this.state.hasError) {
-      console.log('💥 ErrorBoundary: Rendering error fallback UI');
+
       
       return (
         <div style={{

@@ -3,24 +3,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import StartupIdeaCard from "@/components/StartupIdeaCard";
+import SEO from "@/components/SEO";
 import CategoryGrid from "@/components/CategoryGrid";
 import StatsSection from "@/components/StatsSection";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, RefreshCw } from "lucide-react";
-import { createClient } from '@supabase/supabase-js';
-
-// Supabase client configuration
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://hxxjkmgznhhvvmpokfih.supabase.co';
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-// Check for required environment variables
-if (!supabaseKey) {
-  console.error('Missing VITE_SUPABASE_ANON_KEY environment variable');
-}
-
-// Create Supabase client only if we have the required key
-const supabase = supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
+import { supabase, isSupabaseAvailable } from "@/lib/supabase";
 
 const Index = () => {
   const location = useLocation();
@@ -58,7 +47,7 @@ const Index = () => {
       setIsLoading(true);
       
       // Check if Supabase client is available
-      if (!supabase) {
+      if (!isSupabaseAvailable()) {
         setHasError(true);
         setErrorMessage('Missing database configuration - check environment variables');
         toast({
@@ -176,7 +165,13 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background film-grain">
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      <SEO 
+        title="StartupIdea.AI - AI-Powered Daily Startup Ideas | Build Your Next Venture"
+        description="Get fresh AI-generated startup ideas daily. Explore innovative business concepts with market analysis, revenue models, and actionable insights. Turn ideas into reality with StartupIdea.AI."
+        keywords="startup ideas, AI generated business ideas, entrepreneurship, business concepts, startup inspiration, market analysis, revenue models, business planning, innovation, venture ideas"
+        url="https://startupidea.ai/"
+      />
       <Header />
       <Hero />
       
@@ -324,6 +319,30 @@ const Index = () => {
           <p className="text-muted-foreground font-oswald text-lg tracking-wider uppercase">
             "ONE FRESH STARTUP IDEA DELIVERED DAILY"
           </p>
+          
+          {/* Legal Links */}
+          <div className="mt-8 pt-6 border-t border-primary/20">
+            <div className="flex justify-center items-center space-x-8">
+              <button 
+                onClick={() => navigate('/imprint')}
+                className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 font-oswald tracking-wider uppercase"
+              >
+                Imprint
+              </button>
+              <button 
+                onClick={() => navigate('/privacy')}
+                className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 font-oswald tracking-wider uppercase"
+              >
+                Privacy
+              </button>
+              <button 
+                onClick={() => navigate('/terms')}
+                className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 font-oswald tracking-wider uppercase"
+              >
+                Terms
+              </button>
+            </div>
+          </div>
         </div>
       </footer>
     </div>

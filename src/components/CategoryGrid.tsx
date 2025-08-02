@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from "@/lib/supabase";
 import { 
   Smartphone, 
   ShoppingCart, 
@@ -16,14 +16,6 @@ import {
   Car,
   Home
 } from "lucide-react";
-
-// Supabase client configuration
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://hxxjkmgznhhvvmpokfih.supabase.co';
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-if (!supabaseKey) {
-  console.error('Missing VITE_SUPABASE_ANON_KEY environment variable');
-}
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Category definitions with icons - counts will be fetched from database
 const categoryDefinitions = [
@@ -82,7 +74,7 @@ const CategoryGrid = () => {
           .select('category');
 
         if (error) {
-          console.error('Error fetching categories:', error);
+
           return;
         }
 
@@ -113,7 +105,7 @@ const CategoryGrid = () => {
 
         setCategoriesWithCounts(updatedCategories);
       } catch (error) {
-        console.error('Error fetching category counts:', error);
+
       }
     };
 
