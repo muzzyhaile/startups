@@ -23,8 +23,6 @@ if (!supabaseKey) {
 const supabase = supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
 
 const Index = () => {
-  console.log('🚀 Index.tsx: Index component initializing');
-  
   const location = useLocation();
   const navigate = useNavigate();
   const [startupIdeas, setStartupIdeas] = useState([]);
@@ -53,11 +51,6 @@ const Index = () => {
       }, 100);
     }
   }, [section]);
-  
-  console.log('🔍 Index.tsx: Environment variables check:');
-  console.log('- VITE_SUPABASE_URL:', import.meta.env.VITE_SUPABASE_URL);
-  console.log('- VITE_SUPABASE_ANON_KEY:', import.meta.env.VITE_SUPABASE_ANON_KEY ? 'Set' : 'Missing');
-  console.log('- Supabase client:', supabase ? 'Initialized' : 'Not initialized');
 
   // Fetch startup ideas from Supabase
   const fetchStartupIdeas = async () => {
@@ -66,7 +59,6 @@ const Index = () => {
       
       // Check if Supabase client is available
       if (!supabase) {
-        console.error('❌ Index.tsx: Supabase client not initialized - missing environment variables');
         setHasError(true);
         setErrorMessage('Missing database configuration - check environment variables');
         toast({
@@ -77,8 +69,6 @@ const Index = () => {
         setIsLoading(false);
         return;
       }
-      
-      console.log('🔄 Index.tsx: Starting database query...');
       
       const { data, error } = await supabase
         .from('startup_ideas')
@@ -122,7 +112,6 @@ const Index = () => {
         });
       }
     } catch (error) {
-      console.error('❌ Index.tsx: Failed to fetch startup ideas:', error);
       setHasError(true);
       setErrorMessage(`Database error: ${error.message}`);
       toast({
@@ -131,7 +120,6 @@ const Index = () => {
         variant: "destructive",
       });
     } finally {
-      console.log('🏁 Index.tsx: Finished fetching startup ideas');
       setIsLoading(false);
     }
   };
@@ -140,13 +128,11 @@ const Index = () => {
 
   // Load ideas on component mount
   useEffect(() => {
-    console.log('🎬 Index.tsx: useEffect triggered, fetching startup ideas');
     fetchStartupIdeas();
   }, []);
   
   // If there's an error, show visible error message
   if (hasError) {
-    console.log('💥 Index.tsx: Rendering error state');
     return (
       <div style={{
         minHeight: '100vh',
@@ -188,8 +174,6 @@ const Index = () => {
       </div>
     );
   }
-  
-  console.log('🎨 Index.tsx: Rendering normal UI');
 
   return (
     <div className="min-h-screen bg-background film-grain">
