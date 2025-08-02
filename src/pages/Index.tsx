@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import StartupIdeaCard from "@/components/StartupIdeaCard";
@@ -24,11 +25,34 @@ const supabase = supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
 const Index = () => {
   console.log('🚀 Index.tsx: Index component initializing');
   
+  const location = useLocation();
+  const navigate = useNavigate();
   const [startupIdeas, setStartupIdeas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const { toast } = useToast();
+  
+  // Get section from URL params
+  const searchParams = new URLSearchParams(location.search);
+  const section = searchParams.get('section');
+  
+  // Scroll to top when component mounts or when navigating from idea details
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+  
+  // Handle section-based scrolling
+  useEffect(() => {
+    if (section) {
+      setTimeout(() => {
+        const element = document.getElementById(section === 'ideas' ? 'todays-idea' : section === 'browse' ? 'browse-ideas' : section);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, [section]);
   
   console.log('🔍 Index.tsx: Environment variables check:');
   console.log('- VITE_SUPABASE_URL:', import.meta.env.VITE_SUPABASE_URL);
@@ -174,8 +198,8 @@ const Index = () => {
       
       <StatsSection />
       
-      {/* Featured Ideas Section - Kill Bill style */}
-      <section id="ideas" className="py-20 px-4 relative">
+      {/* Today's Featured Idea Section */}
+      <section id="todays-idea" className="py-20 px-4 relative">
         {/* Yellow accent lines */}
         <div className="absolute top-0 left-0 w-full h-2 bg-gradient-primary" />
         <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-1 h-20 bg-primary" />
@@ -198,15 +222,79 @@ const Index = () => {
                 ))}
               </div>
             </div>
-            
-
           </div>
           
-          {/* Startup Ideas Grid */}
+          {/* Today's Featured Idea - Show only the latest/featured idea */}
           {isLoading ? (
             <div className="flex justify-center items-center py-20">
               <Loader2 className="h-12 w-12 animate-spin text-primary" />
-              <span className="ml-4 font-oswald text-xl text-muted-foreground tracking-wider">LOADING IDEAS...</span>
+              <span className="ml-4 font-oswald text-xl text-muted-foreground tracking-wider">LOADING TODAY'S IDEA...</span>
+            </div>
+          ) : startupIdeas.length > 0 ? (
+            <div className="flex justify-center">
+              <div className="max-w-md">
+                <StartupIdeaCard
+                  {...startupIdeas[0]}
+                  featured={true}
+                />
+              </div>
+            </div>
+          ) : (
+            <div className="text-center py-20">
+              <h3 className="font-bebas text-3xl text-muted-foreground mb-4 tracking-wider">NO IDEAS YET</h3>
+              <p className="text-muted-foreground font-oswald">Today's startup idea will appear here once your n8n workflow creates it!</p>
+            </div>
+          )}
+          
+          {/* View All Ideas Button */}
+          {startupIdeas.length > 1 && (
+            <div className="text-center mt-12">
+              <Button 
+                onClick={() => {
+                  const element = document.getElementById('browse-ideas');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-bebas text-lg tracking-wider transform -skew-x-6 px-8 py-4"
+              >
+                VIEW ALL {startupIdeas.length} IDEAS
+              </Button>
+            </div>
+          )}
+        </div>
+      </section>
+      
+      {/* Browse All Ideas Section */}
+      <section id="browse-ideas" className="py-20 px-4 relative bg-gradient-secondary">
+        {/* Yellow accent lines */}
+        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-primary" />
+        
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="font-bebas text-5xl md:text-7xl mb-6 text-foreground tracking-wider uppercase">
+              BROWSE
+              <span className="text-primary neon-glow block"> ALL IDEAS</span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-oswald">
+              EXPLORE ALL CONCEPTS • FIND YOUR PERFECT MATCH • START BUILDING
+            </p>
+            
+            {/* Film strip decoration */}
+            <div className="flex justify-center mt-8">
+              <div className="flex space-x-1">
+                {[...Array(7)].map((_, i) => (
+                  <div key={i} className="w-2 h-6 bg-primary/30 border border-primary/50" />
+                ))}
+              </div>
+            </div>
+          </div>
+          
+          {/* All Startup Ideas Grid */}
+          {isLoading ? (
+            <div className="flex justify-center items-center py-20">
+              <Loader2 className="h-12 w-12 animate-spin text-primary" />
+              <span className="ml-4 font-oswald text-xl text-muted-foreground tracking-wider">LOADING ALL IDEAS...</span>
             </div>
           ) : startupIdeas.length > 0 ? (
             <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
@@ -220,13 +308,15 @@ const Index = () => {
           ) : (
             <div className="text-center py-20">
               <h3 className="font-bebas text-3xl text-muted-foreground mb-4 tracking-wider">NO IDEAS YET</h3>
-              <p className="text-muted-foreground font-oswald">New startup ideas will appear here once your n8n workflow creates them!</p>
+              <p className="text-muted-foreground font-oswald">Startup ideas will appear here once your n8n workflow creates them!</p>
             </div>
           )}
         </div>
       </section>
       
-      <CategoryGrid />
+      <div id="categories">
+        <CategoryGrid />
+      </div>
       
       {/* Kill Bill Footer */}
       <footer className="py-16 border-t-2 border-primary bg-gradient-secondary relative overflow-hidden">

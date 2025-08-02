@@ -1,4 +1,5 @@
 import { useParams, Link } from "react-router-dom";
+import { useEffect } from "react";
 import { ArrowLeft, Target, DollarSign, Users, Clock, TrendingUp, Lightbulb, CheckCircle, AlertTriangle, Building, Code, Rocket, BarChart3, Calendar, Shield, Zap, User, Globe } from "lucide-react";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
@@ -384,6 +385,11 @@ const IdeaDetail = () => {
   const { ideaTitle } = useParams<{ ideaTitle: string }>();
   const decodedTitle = ideaTitle ? decodeURIComponent(ideaTitle) : "";
   const details = getIdeaDetails(decodedTitle);
+  
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">

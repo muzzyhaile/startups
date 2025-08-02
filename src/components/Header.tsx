@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Lightbulb, Target, Menu } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -23,18 +23,22 @@ const Header = () => {
         
         {/* Cinematic navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <a href="#ideas" className="font-oswald text-sm font-medium text-foreground/80 hover:text-primary transition-cinematic tracking-wider uppercase relative group">
-            IDEAS
+          <Link to="/?section=ideas" className="font-oswald text-sm font-medium text-foreground/80 hover:text-primary transition-cinematic tracking-wider uppercase relative group">
+            TODAY'S IDEA
             <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
-          </a>
-          <a href="#categories" className="font-oswald text-sm font-medium text-foreground/80 hover:text-primary transition-cinematic tracking-wider uppercase relative group">
+          </Link>
+          <Link to="/?section=browse" className="font-oswald text-sm font-medium text-foreground/80 hover:text-primary transition-cinematic tracking-wider uppercase relative group">
+            BROWSE IDEAS
+            <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
+          </Link>
+          <Link to="/?section=categories" className="font-oswald text-sm font-medium text-foreground/80 hover:text-primary transition-cinematic tracking-wider uppercase relative group">
             CATEGORIES
             <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
-          </a>
-          <a href="#about" className="font-oswald text-sm font-medium text-foreground/80 hover:text-primary transition-cinematic tracking-wider uppercase relative group">
+          </Link>
+          <Link to="/about" className="font-oswald text-sm font-medium text-foreground/80 hover:text-primary transition-cinematic tracking-wider uppercase relative group">
             ABOUT
             <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
-          </a>
+          </Link>
         </nav>
 
         <div className="flex items-center space-x-3">
@@ -42,10 +46,10 @@ const Header = () => {
             asChild
             className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium hidden sm:flex"
           >
-            <a href="#ideas">
+            <Link to="/?section=ideas">
               <Target className="w-4 h-4 mr-2" />
               Today's Idea
-            </a>
+            </Link>
           </Button>
           
           <Button variant="ghost" size="sm" className="md:hidden text-primary">

@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Category from "./pages/Category";
 import IdeaDetail from "./pages/IdeaDetail";
+import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
 console.log('🚀 App.tsx: Initializing App component');
@@ -27,6 +28,7 @@ const App = () => {
               <Route path="/" element={<Index />} />
               <Route path="/category/:categoryName" element={<Category />} />
               <Route path="/idea/:ideaTitle" element={<IdeaDetail />} />
+              <Route path="/about" element={<About />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
