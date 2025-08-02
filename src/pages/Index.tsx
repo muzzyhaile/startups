@@ -116,8 +116,56 @@ const Index = () => {
 
   // Load ideas on component mount
   useEffect(() => {
+    console.log('🎬 Index.tsx: useEffect triggered, fetching startup ideas');
     fetchStartupIdeas();
   }, []);
+  
+  // If there's an error, show visible error message
+  if (hasError) {
+    console.log('💥 Index.tsx: Rendering error state');
+    return (
+      <div style={{
+        minHeight: '100vh',
+        backgroundColor: '#ffe6e6',
+        padding: '20px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <div style={{
+          backgroundColor: '#ff0000',
+          color: 'white',
+          padding: '30px',
+          borderRadius: '10px',
+          maxWidth: '600px',
+          textAlign: 'center',
+          fontSize: '18px'
+        }}>
+          <h1 style={{ fontSize: '36px', marginBottom: '20px' }}>🚨 APPLICATION ERROR 🚨</h1>
+          <p style={{ marginBottom: '15px' }}><strong>Error:</strong> {errorMessage}</p>
+          <p style={{ fontSize: '14px', marginTop: '20px' }}>Check browser console for detailed logs</p>
+          <button 
+            onClick={() => window.location.reload()} 
+            style={{
+              backgroundColor: 'white',
+              color: 'red',
+              padding: '10px 20px',
+              border: 'none',
+              borderRadius: '5px',
+              marginTop: '20px',
+              fontSize: '16px',
+              cursor: 'pointer'
+            }}
+          >
+            Reload Page
+          </button>
+        </div>
+      </div>
+    );
+  }
+  
+  console.log('🎨 Index.tsx: Rendering normal UI');
 
   return (
     <div className="min-h-screen bg-background film-grain">
