@@ -7,16 +7,16 @@ const Header = () => {
     <header className="fixed top-0 z-50 w-full bg-background/95 backdrop-blur border-b border-primary/20">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo with lightbulb */}
-        <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-cinematic">
-          <div className="w-10 h-10 bg-primary flex items-center justify-center transform -skew-x-12 shadow-glow">
+        <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-colors">
+          <div className="w-10 h-10 bg-primary flex items-center justify-center rounded-lg">
             <Lightbulb className="w-5 h-5 text-primary-foreground" />
           </div>
           <div className="flex flex-col">
-            <span className="font-bebas text-xl tracking-wider text-foreground">
-              STARTUPIDEA.AI
+            <span className="text-xl font-semibold text-foreground">
+              StartupIdea.ai
             </span>
-            <span className="font-mono text-xs text-primary tracking-widest leading-none">
-              INNOVATION_ENGINE
+            <span className="text-xs text-primary font-medium">
+              Daily startup ideas
             </span>
           </div>
         </Link>
@@ -38,9 +38,9 @@ const Header = () => {
         </nav>
 
         <div className="flex items-center space-x-3">
-          <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-bebas text-sm tracking-wider transform -skew-x-6 transition-cinematic shadow-card hidden sm:flex">
+          <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium hidden sm:flex">
             <Target className="w-4 h-4 mr-2" />
-            GENERATE IDEA
+            Get Today's Idea
           </Button>
           
           <Button variant="ghost" size="sm" className="md:hidden text-primary">
