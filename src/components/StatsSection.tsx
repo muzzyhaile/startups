@@ -4,26 +4,26 @@ const stats = [
   {
     icon: Target,
     value: "365+",
-    label: "IDEAS DELIVERED",
-    description: "Fresh concepts daily"
+    label: "IDEAS SHARED",
+    description: "Curated daily concepts"
   },
   {
     icon: Crosshair,
-    value: "95%",
-    label: "MARKET VALIDATED",
-    description: "Research-backed opportunities"
+    value: "100%",
+    label: "RESEARCH BASED",
+    description: "Market trends analyzed"
   },
   {
     icon: Sword,
-    value: "10K+",
-    label: "ENTREPRENEURS",
-    description: "Building the future"
+    value: "5K+",
+    label: "READERS",
+    description: "Growing community"
   },
   {
     icon: Zap,
-    value: "$2B+",
-    label: "MARKET POTENTIAL",
-    description: "Combined opportunity size"
+    value: "24H",
+    label: "FRESH CONTENT",
+    description: "Updated daily"
   }
 ];
 
