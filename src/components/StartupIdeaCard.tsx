@@ -84,13 +84,13 @@ const StartupIdeaCard = ({
           <div className="space-y-3">
             <div className="flex items-center gap-2">
               <Badge className="bg-primary text-primary-foreground font-bebas text-xs tracking-wider transform -skew-x-6">
-                {category.toUpperCase()}
+                {(category || 'General').toUpperCase()}
               </Badge>
               <Badge 
                 variant="outline" 
-                className={`font-mono text-xs ${getDifficultyColor(difficulty)} transform skew-x-6`}
+                className={`font-mono text-xs ${getDifficultyColor(difficulty || 'Medium')} transform skew-x-6`}
               >
-                {difficulty.toUpperCase()}
+                {(difficulty || 'Medium').toUpperCase()}
               </Badge>
               {featured && (
                 <Badge className="bg-gradient-primary text-primary-foreground font-bebas text-xs shadow-glow neon-glow">
