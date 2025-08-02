@@ -1,5 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { createClient } from '@supabase/supabase-js';
 import { 
   Smartphone, 
   ShoppingCart, 
@@ -15,71 +17,105 @@ import {
   Home
 } from "lucide-react";
 
-const categories = [
+// Supabase client configuration
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://hxxjkmgznhhvvmpokfih.supabase.co';
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh4eGprbWd6bmhodnZtcG9rZmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjcyOTcxMTEsImV4cCI6MjA0Mjg3MzExMX0.NQgQz6SHPz6sGCEMAlnDNZmE6SQNT8HEa6-6q1WDZlE';
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+// Category definitions with icons - counts will be fetched from database
+const categoryDefinitions = [
   {
     name: "AI & Technology",
     icon: Code,
-    count: 45,
+    keywords: ["AI", "Technology", "Tech", "Machine Learning", "Artificial Intelligence", "EdTech"]
   },
   {
     name: "E-commerce",
     icon: ShoppingCart,
-    count: 38,
+    keywords: ["E-commerce", "Ecommerce", "Shopping", "Retail", "Commerce"]
   },
   {
     name: "HealthTech",
     icon: Heart,
-    count: 32,
-  },
-  {
-    name: "EdTech",
-    icon: GraduationCap,
-    count: 28,
-  },
-  {
-    name: "Sustainability",
-    icon: Leaf,
-    count: 25,
+    keywords: ["Health", "HealthTech", "Medical", "Healthcare", "Wellness"]
   },
   {
     name: "FinTech",
     icon: TrendingUp,
-    count: 42,
+    keywords: ["FinTech", "Finance", "Financial", "Banking", "Payment", "Dispute"]
   },
   {
-    name: "Cybersecurity",
-    icon: Shield,
-    count: 22,
+    name: "Business Operations",
+    icon: TrendingUp,
+    keywords: ["Business", "Operations", "Management", "Automation"]
   },
   {
-    name: "Gaming",
-    icon: Gamepad2,
-    count: 18,
+    name: "Education",
+    icon: GraduationCap,
+    keywords: ["Education", "Learning", "School", "Training"]
   },
   {
-    name: "Mobile Apps",
+    name: "Search & Data",
+    icon: Code,
+    keywords: ["Search", "Data", "Platform", "Analytics"]
+  },
+  {
+    name: "Reviews & Marketing",
     icon: Smartphone,
-    count: 52,
-  },
-  {
-    name: "Food & Beverage",
-    icon: Utensils,
-    count: 19,
-  },
-  {
-    name: "Transportation",
-    icon: Car,
-    count: 15,
-  },
-  {
-    name: "Real Estate",
-    icon: Home,
-    count: 21,
+    keywords: ["Review", "Marketing", "Collection", "Voice"]
   },
 ];
 
 const CategoryGrid = () => {
   const navigate = useNavigate();
+  const [categoriesWithCounts, setCategoriesWithCounts] = useState(categoryDefinitions.map(cat => ({ ...cat, count: 0 })));
+
+  // Fetch real category counts from database
+  useEffect(() => {
+    const fetchCategoryCounts = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('startup_ideas')
+          .select('category');
+
+        if (error) {
+          console.error('Error fetching categories:', error);
+          return;
+        }
+
+        // Count categories and map to our predefined categories
+        const categoryCounts: Record<string, number> = {};
+        
+        data?.forEach(idea => {
+          const category = idea.category;
+          if (category) {
+            // Find matching category definition based on keywords
+            const matchingCategory = categoryDefinitions.find(catDef => 
+              catDef.keywords.some(keyword => 
+                category.toLowerCase().includes(keyword.toLowerCase())
+              )
+            );
+            
+            if (matchingCategory) {
+              categoryCounts[matchingCategory.name] = (categoryCounts[matchingCategory.name] || 0) + 1;
+            }
+          }
+        });
+
+        // Update categories with real counts
+        const updatedCategories = categoryDefinitions.map(catDef => ({
+          ...catDef,
+          count: categoryCounts[catDef.name] || 0
+        }));
+
+        setCategoriesWithCounts(updatedCategories);
+      } catch (error) {
+        console.error('Error fetching category counts:', error);
+      }
+    };
+
+    fetchCategoryCounts();
+  }, []);
 
   return (
     <section id="explore-categories" className="py-20 px-4 relative overflow-hidden bg-gradient-hero film-grain">
@@ -113,7 +149,7 @@ const CategoryGrid = () => {
         </div>
         
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {categories.map((category) => {
+          {categoriesWithCounts.map((category) => {
             const IconComponent = category.icon;
             return (
               <Card 
