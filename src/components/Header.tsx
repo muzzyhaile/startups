@@ -2,11 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Lightbulb, Target, Menu } from "lucide-react";
 import { Link } from "react-router-dom";
 
-interface HeaderProps {
-  onGetTodaysIdea?: () => void;
-}
-
-const Header = ({ onGetTodaysIdea }: HeaderProps) => {
+const Header = () => {
   return (
     <header className="fixed top-0 z-50 w-full bg-background/95 backdrop-blur border-b border-primary/20">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
@@ -43,11 +39,13 @@ const Header = ({ onGetTodaysIdea }: HeaderProps) => {
 
         <div className="flex items-center space-x-3">
           <Button 
-            onClick={onGetTodaysIdea}
+            asChild
             className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium hidden sm:flex"
           >
-            <Target className="w-4 h-4 mr-2" />
-            Get Today's Idea
+            <a href="#ideas">
+              <Target className="w-4 h-4 mr-2" />
+              Today's Idea
+            </a>
           </Button>
           
           <Button variant="ghost" size="sm" className="md:hidden text-primary">

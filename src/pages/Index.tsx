@@ -78,13 +78,13 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background film-grain">
-      <Header onGetTodaysIdea={fetchStartupIdeas} />
+      <Header />
       <Hero />
       
       <StatsSection />
       
       {/* Featured Ideas Section - Kill Bill style */}
-      <section className="py-20 px-4 relative">
+      <section id="ideas" className="py-20 px-4 relative">
         {/* Yellow accent lines */}
         <div className="absolute top-0 left-0 w-full h-2 bg-gradient-primary" />
         <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-1 h-20 bg-primary" />
