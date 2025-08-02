@@ -42,8 +42,15 @@ const Index = () => {
           revenueModel: idea.revenue_model,
           marketSize: idea.market_size,
           timeToMarket: idea.time_to_market,
+          salary: idea.salary,
           difficulty: idea.difficulty || 'Medium',
           featured: idea.featured || false,
+          riskAssessment: idea.risk_assessment_and_mitigation || [],
+          goToMarketStrategy: idea.go_to_market_strategy || [],
+          successMetrics: idea.success_metrics_kpis || [],
+          keyStrengths: idea.key_strengths || [],
+          keyChallenges: idea.key_challenges || [],
+          recommendedNextSteps: idea.recommended_next_steps || [],
         }));
         
         setStartupIdeas(mappedIdeas);

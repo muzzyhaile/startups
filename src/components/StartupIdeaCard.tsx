@@ -12,8 +12,20 @@ interface StartupIdeaCardProps {
   revenueModel: string;
   marketSize: string;
   timeToMarket: string;
+  salary?: string;
   difficulty: "Easy" | "Medium" | "Hard";
   featured?: boolean;
+  riskAssessment?: Array<{
+    risk: string;
+    likelihood: string;
+    impact: string;
+    mitigation: string;
+  }>;
+  goToMarketStrategy?: string[];
+  successMetrics?: string[];
+  keyStrengths?: string[];
+  keyChallenges?: string[];
+  recommendedNextSteps?: string[];
 }
 
 const StartupIdeaCard = ({
@@ -24,8 +36,15 @@ const StartupIdeaCard = ({
   revenueModel,
   marketSize,
   timeToMarket,
+  salary,
   difficulty,
   featured = false,
+  riskAssessment = [],
+  goToMarketStrategy = [],
+  successMetrics = [],
+  keyStrengths = [],
+  keyChallenges = [],
+  recommendedNextSteps = [],
 }: StartupIdeaCardProps) => {
   const navigate = useNavigate();
   const getDifficultyColor = (difficulty: string) => {
@@ -134,6 +153,76 @@ const StartupIdeaCard = ({
             </div>
           </div>
         </div>
+        
+        {/* Salary Information */}
+        {salary && (
+          <div className="bg-primary/10 border border-primary/20 rounded-lg p-3">
+            <p className="text-foreground/50 font-mono text-xs tracking-wider uppercase mb-1">Expected Salary</p>
+            <p className="font-bebas text-lg text-primary tracking-wider">{salary}</p>
+          </div>
+        )}
+        
+        {/* Key Strengths */}
+        {keyStrengths.length > 0 && (
+          <div>
+            <h4 className="font-bebas text-sm tracking-wider uppercase text-primary mb-2">💪 Key Strengths</h4>
+            <ul className="space-y-1">
+              {keyStrengths.slice(0, 3).map((strength, index) => (
+                <li key={index} className="text-sm font-oswald flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>{strength}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        
+        {/* Key Challenges */}
+        {keyChallenges.length > 0 && (
+          <div>
+            <h4 className="font-bebas text-sm tracking-wider uppercase text-yellow-500 mb-2">⚠️ Key Challenges</h4>
+            <ul className="space-y-1">
+              {keyChallenges.slice(0, 2).map((challenge, index) => (
+                <li key={index} className="text-sm font-oswald flex items-start gap-2">
+                  <span className="text-yellow-500 mt-1">•</span>
+                  <span>{challenge}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        
+        {/* Go-to-Market Strategy Preview */}
+        {goToMarketStrategy.length > 0 && (
+          <div>
+            <h4 className="font-bebas text-sm tracking-wider uppercase text-primary mb-2">🚀 Go-to-Market</h4>
+            <ul className="space-y-1">
+              {goToMarketStrategy.slice(0, 2).map((strategy, index) => (
+                <li key={index} className="text-sm font-oswald flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>{strategy}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        
+        {/* Risk Assessment Preview */}
+        {riskAssessment.length > 0 && (
+          <div>
+            <h4 className="font-bebas text-sm tracking-wider uppercase text-red-500 mb-2">🎯 Top Risk</h4>
+            <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-3">
+              <div className="flex justify-between items-start mb-2">
+                <p className="font-oswald font-medium text-sm">{riskAssessment[0].risk}</p>
+                <div className="flex gap-1">
+                  <Badge variant="outline" className="text-xs">{riskAssessment[0].likelihood}</Badge>
+                  <Badge variant="outline" className="text-xs">{riskAssessment[0].impact}</Badge>
+                </div>
+              </div>
+              <p className="text-xs text-foreground/70 font-oswald">{riskAssessment[0].mitigation}</p>
+            </div>
+          </div>
+        )}
         
         <Button 
           className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bebas text-lg tracking-wider transform -skew-x-6 transition-cinematic shadow-card relative group overflow-hidden"
