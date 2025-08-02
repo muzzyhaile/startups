@@ -98,13 +98,16 @@ const Index = () => {
         });
       }
     } catch (error) {
-      console.error('Failed to fetch startup ideas:', error);
+      console.error('❌ Index.tsx: Failed to fetch startup ideas:', error);
+      setHasError(true);
+      setErrorMessage(`Database error: ${error.message}`);
       toast({
         title: "Error Loading Ideas",
         description: "Could not load startup ideas from database.",
         variant: "destructive",
       });
     } finally {
+      console.log('🏁 Index.tsx: Finished fetching startup ideas');
       setIsLoading(false);
     }
   };
