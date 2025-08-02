@@ -12,10 +12,14 @@ import { createClient } from '@supabase/supabase-js';
 // Supabase client configuration
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://hxxjkmgznhhvvmpokfih.supabase.co';
 const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+// Check for required environment variables
 if (!supabaseKey) {
   console.error('Missing VITE_SUPABASE_ANON_KEY environment variable');
 }
-const supabase = createClient(supabaseUrl, supabaseKey);
+
+// Create Supabase client only if we have the required key
+const supabase = supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
 
 const Index = () => {
   const [startupIdeas, setStartupIdeas] = useState([]);
@@ -26,6 +30,19 @@ const Index = () => {
   const fetchStartupIdeas = async () => {
     try {
       setIsLoading(true);
+      
+      // Check if Supabase client is available
+      if (!supabase) {
+        console.error('Supabase client not initialized - missing environment variables');
+        toast({
+          title: "Configuration Error",
+          description: "Missing database configuration. Please check environment variables.",
+          variant: "destructive",
+        });
+        setIsLoading(false);
+        return;
+      }
+      
       const { data, error } = await supabase
         .from('startup_ideas')
         .select('*')
