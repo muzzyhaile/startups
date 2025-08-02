@@ -22,9 +22,18 @@ if (!supabaseKey) {
 const supabase = supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
 
 const Index = () => {
+  console.log('🚀 Index.tsx: Index component initializing');
+  
   const [startupIdeas, setStartupIdeas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const { toast } = useToast();
+  
+  console.log('🔍 Index.tsx: Environment variables check:');
+  console.log('- VITE_SUPABASE_URL:', import.meta.env.VITE_SUPABASE_URL);
+  console.log('- VITE_SUPABASE_ANON_KEY:', import.meta.env.VITE_SUPABASE_ANON_KEY ? 'Set' : 'Missing');
+  console.log('- Supabase client:', supabase ? 'Initialized' : 'Not initialized');
 
   // Fetch startup ideas from Supabase
   const fetchStartupIdeas = async () => {
@@ -33,7 +42,9 @@ const Index = () => {
       
       // Check if Supabase client is available
       if (!supabase) {
-        console.error('Supabase client not initialized - missing environment variables');
+        console.error('❌ Index.tsx: Supabase client not initialized - missing environment variables');
+        setHasError(true);
+        setErrorMessage('Missing database configuration - check environment variables');
         toast({
           title: "Configuration Error",
           description: "Missing database configuration. Please check environment variables.",
@@ -42,6 +53,8 @@ const Index = () => {
         setIsLoading(false);
         return;
       }
+      
+      console.log('🔄 Index.tsx: Starting database query...');
       
       const { data, error } = await supabase
         .from('startup_ideas')
