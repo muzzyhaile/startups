@@ -67,21 +67,58 @@ const IdeaDetail = () => {
         .eq('title', reconstructedTitle)
         .single();
       
-      // If exact match fails, try fuzzy matching with ilike
+      // If exact match fails, try multiple fuzzy matching strategies
       if (fetchError && fetchError.code === 'PGRST116') {
-        const { data: fuzzyData, error: fuzzyError } = await supabase
+        // Strategy 1: Try with hyphens instead of spaces
+        const hyphenatedTitle = reconstructedTitle.replace(/ /g, '-');
+        let { data: hyphenData, error: hyphenError } = await supabase
           .from('startup_ideas')
           .select('*')
-          .ilike('title', `%${reconstructedTitle.replace(/ /g, '%')}%`)
-          .limit(1)
+          .eq('title', hyphenatedTitle)
           .single();
         
-        data = fuzzyData;
-        fetchError = fuzzyError;
+        if (!hyphenError) {
+          data = hyphenData;
+          fetchError = null;
+        } else {
+          // Strategy 2: Try ILIKE with word-based matching
+          const words = reconstructedTitle.split(' ').filter(word => word.length > 2);
+          const likePattern = words.map(word => `%${word}%`).join('');
+          
+          let { data: fuzzyData, error: fuzzyError } = await supabase
+            .from('startup_ideas')
+            .select('*')
+            .ilike('title', likePattern)
+            .limit(1);
+          
+          if (fuzzyData && fuzzyData.length > 0) {
+            data = fuzzyData[0];
+            fetchError = null;
+          } else {
+            // Strategy 3: Try partial word matching with original slug
+            const slugWords = slug.split('-').filter(word => word.length > 2);
+            const slugPattern = slugWords.map(word => `%${word}%`).join('');
+            
+            let { data: slugData, error: slugError } = await supabase
+              .from('startup_ideas')
+              .select('*')
+              .ilike('title', slugPattern)
+              .limit(1);
+            
+            if (slugData && slugData.length > 0) {
+              data = slugData[0];
+              fetchError = null;
+            } else {
+              fetchError = fuzzyError;
+            }
+          }
+        }
       }
 
       if (fetchError) {
         console.error('Error fetching idea:', fetchError);
+        console.error('Attempted slug:', slug);
+        console.error('Attempted title:', reconstructedTitle);
         setError('Failed to fetch startup idea data');
       } else {
         setIdeaData(data);
