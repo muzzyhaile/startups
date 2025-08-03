@@ -82,8 +82,8 @@ const StartupIdeaCard = ({
       <CardHeader className="space-y-4 pt-6">
         <div className="flex items-start justify-between">
           <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <Badge className="bg-primary text-primary-foreground font-bebas text-xs tracking-wider transform -skew-x-6">
+            <div className="flex items-center gap-2 flex-wrap">
+              <Badge className="bg-primary text-primary-foreground font-bebas text-xs tracking-wider transform -skew-x-6 max-w-[200px] truncate">
                 {(category || 'General').toUpperCase()}
               </Badge>
               <Badge 

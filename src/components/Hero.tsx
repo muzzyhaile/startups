@@ -46,7 +46,7 @@ const Hero = () => {
             <Button 
               size="lg"
               className="bg-primary hover:bg-primary/90 text-primary-foreground font-bebas text-xl tracking-wider px-12 py-6 h-auto transform -skew-x-6 transition-cinematic shadow-hero group relative overflow-hidden"
-              onClick={() => navigate('/idea/AI-Powered Personal Finance Assistant')}
+              onClick={() => navigate('/?section=ideas')}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
               <Target className="w-6 h-6 mr-3" />
