@@ -90,10 +90,20 @@ const Index = () => {
         }));
         
         setStartupIdeas(mappedIdeas);
+      
+      // Debug: Show latest idea details for troubleshooting
+      if (mappedIdeas.length > 0) {
+        const latestIdea = mappedIdeas[0];
+        toast({
+          title: "Ideas Loaded",
+          description: `Loaded ${data.length} ideas. Latest: "${latestIdea.title.substring(0, 30)}..."`,
+        });
+      } else {
         toast({
           title: "Ideas Loaded",
           description: `Loaded ${data.length} startup ideas from database.`,
         });
+      }
       } else {
         toast({
           title: "No Ideas Found",
@@ -201,9 +211,25 @@ const Index = () => {
                 ))}
               </div>
             </div>
+            
+            {/* Debug: Manual refresh button */}
+            <div className="flex justify-center mt-4">
+              <Button 
+                onClick={() => {
+                  setStartupIdeas([]);
+                  fetchStartupIdeas();
+                }}
+                variant="outline"
+                size="sm"
+                className="font-oswald text-xs tracking-wider uppercase"
+              >
+                <RefreshCw className="w-3 h-3 mr-1" />
+                FORCE REFRESH
+              </Button>
+            </div>
           </div>
           
-          {/* Today's Featured Idea - Show only the latest/featured idea */}
+          {/* Today's Featured Idea - Rotates daily based on date */}
           {isLoading ? (
             <div className="flex justify-center items-center py-20">
               <Loader2 className="h-12 w-12 animate-spin text-primary" />
