@@ -90,20 +90,6 @@ const Index = () => {
         }));
         
         setStartupIdeas(mappedIdeas);
-      
-      // Debug: Show latest idea details for troubleshooting
-      if (mappedIdeas.length > 0) {
-        const latestIdea = mappedIdeas[0];
-        toast({
-          title: "Ideas Loaded",
-          description: `Loaded ${data.length} ideas. Latest: "${latestIdea.title.substring(0, 30)}..."`,
-        });
-      } else {
-        toast({
-          title: "Ideas Loaded",
-          description: `Loaded ${data.length} startup ideas from database.`,
-        });
-      }
       } else {
         toast({
           title: "No Ideas Found",
@@ -210,22 +196,6 @@ const Index = () => {
                   <div key={i} className="w-3 h-8 bg-primary/20 border border-primary/40" />
                 ))}
               </div>
-            </div>
-            
-            {/* Debug: Manual refresh button */}
-            <div className="flex justify-center mt-4">
-              <Button 
-                onClick={() => {
-                  setStartupIdeas([]);
-                  fetchStartupIdeas();
-                }}
-                variant="outline"
-                size="sm"
-                className="font-oswald text-xs tracking-wider uppercase"
-              >
-                <RefreshCw className="w-3 h-3 mr-1" />
-                FORCE REFRESH
-              </Button>
             </div>
           </div>
           
