@@ -11,35 +11,70 @@ import { slugToTitle, normalizeTitle } from "@/lib/utils";
 
 // Helper function to create ChatGPT prompt
 const createChatGPTPrompt = (idea: any) => {
-  const prompt = `Help me develop this startup idea:
+  const prompt = `I need help developing this startup idea with comprehensive research and actionable insights:
 
+🚀 STARTUP IDEA DETAILS:
 Title: ${idea.title}
-
 Description: ${idea.description}
-
 Target Market: ${idea.targetMarket}
-
 Revenue Model: ${idea.revenueModel}
-
 Key Strengths: ${idea.keyStrengths?.join(', ') || 'Not specified'}
-
 Key Challenges: ${idea.keyChallenges?.join(', ') || 'Not specified'}
 
-Please provide detailed guidance on:
-1. Market validation strategies
-2. MVP development approach
-3. Go-to-market tactics
-4. Potential funding sources
-5. Risk mitigation strategies
+📊 COMPREHENSIVE RESEARCH REQUEST:
+Please create a detailed research pack that includes:
 
-I'd like specific, actionable advice for this startup concept.`;
+1. SOCIAL MEDIA & ONLINE PRESENCE RESEARCH:
+   - Search for similar products/services on LinkedIn, Twitter, Instagram, TikTok
+   - Identify key competitors and their social media strategies
+   - Analyze customer discussions, pain points, and feedback on Reddit, Facebook groups
+   - Find relevant industry hashtags and trending topics
+   - Discover influencers and thought leaders in this space
+
+2. MARKET VALIDATION STRATEGIES:
+   - Specific platforms to test demand (landing pages, surveys, social media polls)
+   - Key questions to ask potential customers
+   - Metrics to track for validation
+   - Timeline for validation phase
+
+3. COMPETITIVE LANDSCAPE ANALYSIS:
+   - Direct and indirect competitors
+   - Their pricing models and market positioning
+   - Gaps in their offerings that this idea could fill
+   - Competitive advantages and differentiation opportunities
+
+4. MVP DEVELOPMENT ROADMAP:
+   - Core features for initial launch
+   - Technical requirements and tech stack recommendations
+   - Development timeline and milestones
+   - Resource requirements (team, budget, tools)
+
+5. GO-TO-MARKET STRATEGY:
+   - Customer acquisition channels (paid, organic, partnerships)
+   - Content marketing strategy for social media
+   - PR and launch strategy
+   - Pricing strategy and revenue projections
+
+6. FUNDING & GROWTH PLAN:
+   - Potential funding sources (VCs, angels, crowdfunding)
+   - Key metrics investors look for in this industry
+   - Scaling strategies and expansion opportunities
+   - Exit strategies and long-term vision
+
+7. RISK ASSESSMENT & MITIGATION:
+   - Technical, market, and financial risks
+   - Regulatory or legal considerations
+   - Contingency plans for major challenges
+   - Success metrics and KPIs to track
+
+Please provide specific, actionable recommendations with real examples, tools, and resources I can use immediately. Include relevant websites, platforms, and contacts where possible.`;
   
   return encodeURIComponent(prompt);
 };
 
 // IdeaDetail Component
 const IdeaDetail = () => {
-  const { title: slug } = useParams<{ title: string }>();
+  const { ideaTitle: slug } = useParams<{ ideaTitle: string }>();
   const [ideaData, setIdeaData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -50,8 +85,14 @@ const IdeaDetail = () => {
   }, [slug]);
   
   const fetchIdeaData = async () => {
-    if (!slug || !supabase) {
-      setError('Unable to fetch data');
+    if (!slug) {
+      setError('No startup idea specified');
+      setLoading(false);
+      return;
+    }
+    
+    if (!supabase) {
+      setError('Database connection unavailable');
       setLoading(false);
       return;
     }
@@ -116,15 +157,11 @@ const IdeaDetail = () => {
       }
 
       if (fetchError) {
-        console.error('Error fetching idea:', fetchError);
-        console.error('Attempted slug:', slug);
-        console.error('Attempted title:', reconstructedTitle);
         setError('Failed to fetch startup idea data');
       } else {
         setIdeaData(data);
       }
     } catch (err) {
-      console.error('Error:', err);
       setError('An unexpected error occurred');
     } finally {
       setLoading(false);
