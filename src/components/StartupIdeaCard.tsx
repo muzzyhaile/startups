@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Target, DollarSign, Users, Clock, Crosshair, Sword } from "lucide-react";
+import { createSlug } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 
 interface StartupIdeaCardProps {
@@ -68,7 +69,7 @@ const StartupIdeaCard = ({
           : "border-border hover:border-primary/50"
       }`}
       onClick={() => {
-        navigate(`/idea/${encodeURIComponent(title)}`);
+        navigate(`/idea/${createSlug(title)}`);
       }}
     >
       {/* Yellow accent line */}
@@ -229,11 +230,11 @@ const StartupIdeaCard = ({
           size="lg"
           onClick={(e) => {
             e.stopPropagation();
-            navigate(`/idea/${encodeURIComponent(title)}`);
+            navigate(`/idea/${createSlug(title)}`);
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-          <span className="relative">EXECUTE PLAN</span>
+          <span className="relative">VIEW DETAILS</span>
         </Button>
       </CardContent>
     </Card>
